@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const config = require('./config')
+const config = require('../config')
 
 mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@cluster0.gufqd.mongodb.net/pwero?retryWrites=true&w=majority`,
   { useNewUrlParser: true,

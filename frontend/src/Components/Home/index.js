@@ -8,7 +8,7 @@ function Home() {
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    api.get('stuff')
+    api.get('exercice')
       .then(function (response) {
         // handle success
         console.log(response.data);

@@ -28,7 +28,7 @@ function NewExercice() {
 
     evt.preventDefault()
     
-    api.post('new-exrecice', 
+    api.post('exercice', 
       formValues)
     .then(function (response) {
       console.log(response);

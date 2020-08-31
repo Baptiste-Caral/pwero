@@ -1,18 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-const api = axios.create({
-  baseURL: 'http://localhost:3002/api/',
-  
-});
+import NewExercice from '../NewExercice'
+import api from '../../api'
+
 
 function Home() {
 
   const [items, setItems] = useState([])
-  const [formStuffInput, setFormStuffInput] = useState('')
-
 
   useEffect(() => {
-    
     api.get('stuff')
       .then(function (response) {
         // handle success
@@ -28,39 +23,24 @@ function Home() {
         // always executed
       });
   },[])
-  let stuff = items.map((item, i ) => <p key={i}>{item.description}</p>)
 
-  const handleChangeFormStuff = (evt) => {
-    setFormStuffInput(evt.target.value)
-  }
-
-  const handleSubmitFormStuff = (evt) => {
-
-    evt.preventDefault()
-
-    api.post('stuff', {
-      firstName: formStuffInput, 
-    })
-    .then(function (response) {
-      console.log(response);
-
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    setFormStuffInput('')
-  }
+  let title = items.map((item, i ) => <p key={i}>{item.title}</p>)
+  let limb = items.map((item, i ) => <p key={i}>{item.limb}</p>)
+  let description = items.map((item, i ) => <p key={i}>{item.description}</p>)
+  let type = items.map((item, i ) => <p key={i}>{item.type}</p>)
 
     return (
       <div className="home">
-        {stuff}
-        <form action="" method="post">
-        <label htmlFor="form-stuff">Form stuff</label>
-          <input placeholder='entre un truc' value={formStuffInput} name="form-stuff" id="form-stuff" type="text" onChange={handleChangeFormStuff}/>
-          <button onClick={handleSubmitFormStuff} type="submit">submit</button>
-        </form>
-      </div>
-      
+        <div className="container">
+          <div>{title}</div>
+          <div>{limb}</div>
+          <div>{description}</div>
+          <div>{type}</div>
+        </div>
+        
+        
+        <NewExercice />    
+      </div>   
     );
   }
 

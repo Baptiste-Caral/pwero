@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { FaArrowAltCircleDown } from 'react-icons/fa';
 import './newWorkoutForm.scss';
-// import {WorkoutContext} from '../../Context/WorkoutContext'
+import {WorkoutContext} from '../../Context/WorkoutContext'
 
 function Select({options, size}) {
-  // const [workout, setWorkout] = useContext(WorkoutContext)
+  const [workout, setWorkout] = useContext(WorkoutContext)
 
   if (options === undefined) {
     options = []
@@ -22,6 +22,7 @@ function Select({options, size}) {
     setSelectedValue(event.target.value)
     // close select div
     setOpenList(false)
+    //setWorkout()
     
     
   }

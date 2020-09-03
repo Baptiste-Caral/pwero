@@ -1,17 +1,17 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import api from '../../api'
+import {ExerciceContext} from '../Context/ExerciceContext'
+import { getExercices } from '../../apiCalls/index'
 
-
-function NewExercice() {
+function NewExercice({closeForm}) {
 
   const initialState = {
     title: '',
-    limb: '',
-    description: '',
-    type: ''
+    limb: ''
   }
   
   const [formValues, setFormValues] = useState(initialState)
+  const [exercices, setExercices] = useContext(ExerciceContext)
 
 
   const handleChangeForm= (evt) => {
@@ -35,26 +35,26 @@ function NewExercice() {
       config
       )
     .then(function (response) {
-      console.log(response);
+      
+      // reload datas from API
+      getExercices(setExercices)
+    
     })
     .catch(function (error) {
       console.log(error) 
     });
     setFormValues(initialState)
+
+    closeForm(formValues.title)
   }
 
     return (
    
-        <form action="">
-        <div>Ajouter nouvel exercice</div>
+        <form>
           <label htmlFor="form-new-exercice-title">Exercice</label>
           <input placeholder='Curl Biceps' value={formValues.title} name="title" id="form-new-exercice-title" type="text" onChange={handleChangeForm} />
           <label htmlFor="form-new-exercice-member">Partie du corps activée</label>
           <input placeholder='Bras' value={formValues.limb} name="limb" id="form-new-exercice-limb" type="text-area" onChange={handleChangeForm} />
-          <label htmlFor="form-new-exercice-description">Description</label>
-          <input placeholder='' value={formValues.description} name="description" id="form-new-exercice-description" type="text" onChange={handleChangeForm} />
-          <label htmlFor="form-new-exercice-type">Type</label>
-          <input placeholder='' value={formValues.type} name="type" id="form-new-exercice-type" type="text" onChange={handleChangeForm} />
           <button onClick={handleSubmitForm} >submit</button>
         </form> 
     );

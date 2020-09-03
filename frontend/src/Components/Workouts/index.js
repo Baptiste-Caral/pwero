@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import {WorkoutContext} from '../Context/WorkoutContext'
 // import NewExercice from '../NewExercice'
 import api from '../../api'
-
+import AddExerciceToWorkoutForm from '../NewWorkout/NewWorkoutForm/index'
 import { MdDeleteForever } from "react-icons/md"
 import { AiFillPlusCircle } from "react-icons/ai"
 
@@ -10,11 +10,8 @@ import { AiFillPlusCircle } from "react-icons/ai"
 
 function Exercices() {
 
-  
-
   const [workouts, setWorkouts] = useContext(WorkoutContext)
   const [clickedButton, setClickedButton] = useState(false)
-  
   
   const handleClickAddButton = () => {
   setClickedButton(true)
@@ -43,6 +40,7 @@ function Exercices() {
     
   <div className="workout-container" key={workout._id}>
     <div>Ajouter un exercice <AiFillPlusCircle /></div>
+    <AddExerciceToWorkoutForm />
     <div>{workout.title}</div>
     <div>{workout.exercice.map((exo, index) =>
       <div key={index}>

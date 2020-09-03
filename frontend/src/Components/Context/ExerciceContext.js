@@ -1,5 +1,5 @@
 import React, {useState, createContext, useEffect} from "react"
-import api from '../../api'
+import { getExercices } from '../../apiCalls/index'
 
 export const ExerciceContext = createContext()
 
@@ -7,24 +7,9 @@ export const ExerciceProvider = (props) => {
   const [exercices, setExercices] = useState([])
   
   useEffect(() => {
-
     
-    api.get('exercice')
-    
-      .then(function (response) {
-        // handle success
-        //console.log(response.data);
-        setExercices(response.data)
-      
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-      
+    // load datas from API
+    getExercices(setExercices)
   },[])
 
 return (

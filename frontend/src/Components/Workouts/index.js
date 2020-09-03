@@ -17,7 +17,7 @@ function Exercices() {
   setClickedButton(true)
   console.log(clickedButton);
   }
-
+  console.log(workouts);
   const deleteExercice =  (workout, index) => {
    
     

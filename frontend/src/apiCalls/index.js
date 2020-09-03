@@ -13,6 +13,17 @@ export const getExercices = (setExercices) => {
         console.error(error);
       })
 }
+export const getWorkouts = (setWorkouts) => {
+
+  api.get('workout')
+    
+      .then(function (response) {
+        setWorkouts(response.data)
+      })
+      .catch(function (error) { 
+        console.error(error);
+      })
+}
 export const deleteExercice = (exercice, setExercices) => {
     
   api.delete(`exercice/${exercice._id}`, )
@@ -24,5 +35,16 @@ export const deleteExercice = (exercice, setExercices) => {
       console.error(error);
     })  
 }
-
+export const addExerciceToWorkout = (workout, setWorkouts) => {
+    
+  api.delete(`workout/${workout._id}`, )
+    .then(function () {
+      // reload datas from API
+      //getExercices(setExercices)
+      
+    })
+    .catch(function (error) {
+      console.error(error);
+    })  
+}
   

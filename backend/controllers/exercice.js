@@ -14,7 +14,7 @@ exports.getExercice = (req, res, next) => {
   Exercice.find()
   .then(exercice => res.status(200).json(exercice))
   .catch(error => res.status(400).json({error: error}))
-  console.log() 
+  
 }
 exports.getOneExercice = (req, res, next) => {
   Exercice.findOne({ _id: req.params.id })
@@ -22,9 +22,9 @@ exports.getOneExercice = (req, res, next) => {
     .catch(error => res.status(404).json({ error }));
 }
 exports.modifyExercice = (req, res, next) => {
-  Exercice.updateOne({ _id: req.params.id}, {...req.body, id: req.params.id})
+  Exercice.updateOne({ _id: req.params.id}, {...req.body, _id: req.params.id})
   .then(() => res.status(200).json( {message: 'Exercice modifié !'} ))
-  .catch(error)
+  .catch(error => res.status(400).json({ error }))
 }
 exports.deleteExercice = (req, res, next) => {
   Exercice.deleteOne({ _id: req.params.id })

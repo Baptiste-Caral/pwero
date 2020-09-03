@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const config = require('./config')
 const exerciceRoutes = require('./routes/exercice')
 const userRoutes = require('./routes/user')
+const workoutRoutes = require('./routes/workout')
 
 
 // Connect to Database
@@ -26,6 +27,7 @@ app.use(bodyParser.json())
 
 app.use('/api/exercice', exerciceRoutes)
 app.use('/api/auth', userRoutes)
+app.use('/api/workout', workoutRoutes)
 
 module.exports = app
 

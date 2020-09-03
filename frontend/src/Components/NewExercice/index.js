@@ -27,9 +27,13 @@ function NewExercice() {
   const handleSubmitForm = (evt) => {
 
     evt.preventDefault()
+    const token = localStorage.getItem('token')
+    const config = {headers: {'Authorization': `Bearer ${token}`}}
     
     api.post('exercice', 
-      formValues)
+      formValues,
+      config
+      )
     .then(function (response) {
       console.log(response);
     })
@@ -42,6 +46,7 @@ function NewExercice() {
     return (
    
         <form action="">
+        <div>Ajouter nouvel exercice</div>
           <label htmlFor="form-new-exercice-title">Exercice</label>
           <input placeholder='Curl Biceps' value={formValues.title} name="title" id="form-new-exercice-title" type="text" onChange={handleChangeForm} />
           <label htmlFor="form-new-exercice-member">Partie du corps activée</label>

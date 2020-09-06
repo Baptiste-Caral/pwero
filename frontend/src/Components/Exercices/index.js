@@ -3,6 +3,10 @@ import {ExerciceContext} from '../Context/ExerciceContext'
 import NewExercice from '../NewExercice'
 import {deleteExercice} from '../../apiCalls/index'
 
+//icons
+import { MdDeleteForever } from "react-icons/md"
+import { AiFillPlusCircle } from "react-icons/ai"
+
 function Exercices() {
 
   const [exercices, setExercices] = useContext(ExerciceContext)
@@ -10,6 +14,10 @@ function Exercices() {
 
   const openForm = () => {
     setClickedButton({button: true})
+    if (clickedButton.button === false) {
+      setClickedButton({button: true})
+    } else if (clickedButton.button === true)
+    setClickedButton({button: false})
   }
 
   const closeForm = (NewExerciceTitle) => {
@@ -17,12 +25,16 @@ function Exercices() {
   }
 
 
-  let title = exercices.map((exercice) => 
-    <div key={exercice._id}>
-      <p>{exercice.title}</p>
-      <button>Modifier</button>
-      <button onClick={() => deleteExercice(exercice, setExercices)}>Supprimer</button>
+  let exercicesList = exercices.map((exercice) =>
+  <div>
+    <div className="exercices-list" key={exercice._id}>
+      <div>{exercice.title}</div>
+      <div><MdDeleteForever onClick={() => deleteExercice(exercice, setExercices)}/></div>
     </div>
+    <div className="exercices-border"></div>
+
+  </div> 
+
   )
   // let limb = exercices.map((item, i ) => <p key={i}>{item.limb}</p>)
   
@@ -30,10 +42,13 @@ function Exercices() {
     return (
       
         <div className="exercices-container">
-        <button onClick={openForm}>Ajouter un exercice</button>
-        {clickedButton.title && <div>nouvel exercice: {clickedButton.title} ajouté!</div>}
-        {clickedButton.button && <NewExercice closeForm={closeForm}/>} 
-        <div>{title}</div>
+          <h1>Exercices</h1>
+          <div className="exercices" onClick={openForm}>
+            <h3>Ajouter</h3> 
+            <div className="exercices-add-button"><AiFillPlusCircle size={24} color={'#fff'}/></div> 
+          </div>
+          <div>{clickedButton.button && <NewExercice closeForm={closeForm}/>}</div>  
+          <div>{exercicesList}</div>
         </div>
         
       

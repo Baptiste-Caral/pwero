@@ -50,11 +50,11 @@ function NewExercice({closeForm}) {
 
     return (
    
-        <form>
+        <form className="form-new-exercice">
           <label htmlFor="form-new-exercice-title">Exercice</label>
           <input placeholder='Curl Biceps' value={formValues.title} name="title" id="form-new-exercice-title" type="text" onChange={handleChangeForm} />
-          <label htmlFor="form-new-exercice-member">Partie du corps activée</label>
-          <input placeholder='Bras' value={formValues.limb} name="limb" id="form-new-exercice-limb" type="text-area" onChange={handleChangeForm} />
+          <label htmlFor="form-new-exercice-limb">Muscle activé</label>
+          <input placeholder='Biceps' value={formValues.limb} name="limb" id="form-new-exercice-limb" type="text-area" onChange={handleChangeForm} />
           <button onClick={handleSubmitForm} >submit</button>
         </form> 
     );

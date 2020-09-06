@@ -11,6 +11,8 @@ import {
 import Home from './Components/Home'
 import Login from './Components/Login'
 import Exercices from './Components/Exercices'
+import ModifyWorkout from './Components/ModifyWorkout'
+import WorkoutPanel from './Components/WorkoutPanel'
 
 // Css
 import './App.css'
@@ -27,6 +29,8 @@ function App() {
         <Router>
           <div>
             <nav>
+            <Link className="logo" to="/">Pwero</Link>
+            <div>
               <ul>
                 <li>
                   <Link to="/">Home</Link>
@@ -38,6 +42,8 @@ function App() {
                   <Link to="/exercices">Exercices</Link>
                 </li>
               </ul>
+            </div>
+              
             </nav>
 
             {/* A <Switch> looks through its children <Route>s and
@@ -52,7 +58,12 @@ function App() {
               <Route path="/exercices">
                 <Exercices />
               </Route>
-              
+              <Route path="/modifyworkout/:_id">
+                <ModifyWorkout />
+              </Route>
+              <Route path="/workout/:_id">
+                <WorkoutPanel />
+              </Route>  
             </Switch>
           </div>
         </Router>  

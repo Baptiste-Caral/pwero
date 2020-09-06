@@ -23,8 +23,9 @@ exports.getOneWorkout = (req, res, next) => {
 }
 exports.modifyWorkout = (req, res, next) => {
   Workout.updateOne({ _id: req.params.id}, {...req.body, _id: req.params.id})
-  .then(() => res.status(200).json( {message: 'Workout modifié !'} ))
+  .then(() => res.status(200).json( {message: 'Workout modifié !'}))
   .catch(error => res.status(400).json({ error }))
+  console.log(req.body)
 }
 exports.deleteWorkout = (req, res, next) => {
   Workout.deleteOne({ _id: req.params.id })

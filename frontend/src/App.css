@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
+
 html{
   box-sizing: border-box;
 }
@@ -8,6 +9,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: #1E212A;
+}
+.link {
+  color: #E2697E;
+  text-decoration: none;
 }
 .App { 
   font-family: 'Poppins', sans-serif;  
@@ -209,6 +214,7 @@ nav a {
   justify-content: space-between; 
 }
 .add-exercice-form {
+  color: #fff;
   display: flex;
   flex-direction: column;
   margin: .5em auto;
@@ -224,4 +230,30 @@ nav a {
 .form-new-exercice {
   display: flex;
   flex-direction: column;
+}
+/* /// WORKOUT PANEL /// */
+.workout-panel-container {
+  font-size: 1.2em;
+  background-color: #3A3C48;
+  color: #FFF;
+  border-radius: 30px;
+  margin: 1em;
+  padding: 1em;
+}
+.workout-panel-1 {
+  display: flex;
+  justify-content: space-between;
+  margin: .5em 0;  
+}
+
+.workout-panel-title {
+  text-transform: capitalize;
+  margin: 0; 
+}
+.workout-panel-2 {
+  display: flex;
+  justify-content: space-between; 
+}
+.workout-panel-increment {
+  display: flex;
 }

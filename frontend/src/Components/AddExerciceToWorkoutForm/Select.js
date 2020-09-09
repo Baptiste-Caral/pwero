@@ -21,7 +21,7 @@ function Select({options, size}) {
       setOpenList(false)
   }
   // create an input for each item in listValues array
-  const list = options.map((option, i) => <label key={i} className='label' htmlFor={option}> {option}<input id={option} key={i} type="checkbox" value={option} name="name" onChange={(e) => setSelectedValue(e.target.value)} /></label> )
+  const list = options.map((option, i) => <label key={i} className='label' htmlFor={option}> {option}<input id={option} key={i} type="checkbox" value={option} name="name" onChange={(e) => setSelectedValue(e.target.value)} onClick={handleOpenList}/></label> )
   
   return (
     <div className={`select-wrapper-${size}`}>

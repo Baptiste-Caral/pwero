@@ -11,7 +11,6 @@ import {
 import Home from './Components/Home'
 import Login from './Components/Login'
 import Exercices from './Components/Exercices'
-import ModifyWorkout from './Components/ModifyWorkout'
 import WorkoutPanel from './Components/WorkoutPanel'
 
 // Css
@@ -57,9 +56,6 @@ function App() {
               </Route>
               <Route path="/exercices">
                 <Exercices />
-              </Route>
-              <Route path="/modifyworkout/:_id">
-                <ModifyWorkout />
               </Route>
               <Route path="/workout/:_id">
                 <WorkoutPanel />

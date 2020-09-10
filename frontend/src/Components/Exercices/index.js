@@ -26,10 +26,10 @@ function Exercices() {
 
 
   let exercicesList = exercices.map((exercice) =>
-  <div>
-    <div className="exercices-list" key={exercice._id}>
+  <div key={exercice._id}>
+    <div className="exercices-list" >
       <div>{exercice.title}</div>
-      <div><MdDeleteForever onClick={() => deleteExercice(exercice, setExercices)}/></div>
+      <div><MdDeleteForever color={'#E2697E'} size={24} onClick={() => deleteExercice(exercice, setExercices)}/></div>
     </div>
     <div className="exercices-border"></div>
 

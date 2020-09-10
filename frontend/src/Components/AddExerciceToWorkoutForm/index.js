@@ -44,7 +44,7 @@ function AddExerciceToWorkoutForm  ({getValue}) {
   return (
     <div className="new-workout-form">
       <div className="add-exercice">
-        <AiFillPlusCircle color={'#fff'} onClick={handleOpenList} size={32}/>
+        <AiFillPlusCircle color="#F8BD33" onClick={handleOpenList} size={32}/>
       </div>
         <div className="select-form-container">
           <form 
@@ -52,13 +52,15 @@ function AddExerciceToWorkoutForm  ({getValue}) {
             onChange={handleChange} >
             <label htmlFor="reps">Nombre de reps</label>
             <select name="reps" id="add-reps">
-              <option value={1}>1</option>
-              <option value={2}>2</option>
+            {[...Array(20)].map((x, i) => 
+              <option key={i} value={i+1}>{i+1}</option>
+            )}
             </select>
             <label htmlFor="series">nombre de series </label>
             <select name="series" id="add-series">
-              <option value={1}>1</option>
-              <option value={2}>2</option>
+            {[...Array(10)].map((x, i) => 
+              <option key={i} value={i+1}>{i+1}</option>
+            )}
             </select>
           
         <Select options={exercicesTitles} size={'large'} getValue={getValue}/>

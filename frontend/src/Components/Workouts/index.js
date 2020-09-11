@@ -12,7 +12,6 @@ function Workouts() {
 
   const [workouts] = useContext(WorkoutContext)
   
-  
   let workoutsList = workouts.map((workout)=> 
     <Link key={workout._id} className="link" to={`/workout/${workout._id}`}>          
       <div className="workouts-container" >
@@ -26,7 +25,7 @@ function Workouts() {
             </div>
             <div>
               <div className="workouts-exercice-number">{workout.exercice.length}</div>
-              <div>{`${workout.exercice.length > 1 ? 'exercices' : 'exercice'}`}</div>
+              <div className="workouts-exercices">{`${workout.exercice.length > 1 ? 'exercices' : 'exercice'}`}</div>
             </div>
           </div>
       </div>
@@ -48,7 +47,9 @@ function Workouts() {
             <div>{workoutsList}</div>
           </div>   
             <div className="workouts-add">
-              <IoIosAddCircle size={64} color={'#12C380'} onClick={()=>alert('click')}/>
+            <Link to='/new-workout'>
+              <IoIosAddCircle size={64} color={'#12C380'}/>
+            </Link>
             </div> 
         </div>
       </div> 

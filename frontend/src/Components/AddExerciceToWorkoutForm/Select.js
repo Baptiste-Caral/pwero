@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { AiFillPlusCircle } from "react-icons/ai"
-import './newWorkoutForm.scss';
+import './Select.scss';
 
-function Select({options, size}) {
+function Select({options, size, value}) {
   
   if (options === undefined) {
     options = []
@@ -20,8 +20,13 @@ function Select({options, size}) {
     } else if (openList === true)
       setOpenList(false)
   }
+  const handleChange = (e) => {
+    
+    value = e.target.value
+    setSelectedValue(value)
+  }
   // create an input for each item in listValues array
-  const list = options.map((option, i) => <label key={i} className='label' htmlFor={option}> {option}<input id={option} key={i} type="checkbox" value={option} name="name" onChange={(e) => setSelectedValue(e.target.value)} onClick={handleOpenList}/></label> )
+  const list = options.map((option, i) => <label key={i} className='label' htmlFor={option}> {option}<input id={option} key={i} type="checkbox" value={option} name="name" onChange={handleChange} onClick={handleOpenList}/></label> )
   
   return (
     <div className={`select-wrapper-${size}`}>

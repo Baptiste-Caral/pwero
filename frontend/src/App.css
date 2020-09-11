@@ -114,7 +114,9 @@ nav a {
   background-color: #3A3C48;
   border-radius: 20px; 
 }
-
+.workouts-exercices {
+  text-align: center;
+}
 .workouts-exercice-number {
   text-align: center;
   color: #F8BD33;
@@ -251,3 +253,34 @@ nav a {
   display: flex;
   flex-direction: column;
 }
+/* /// NEW WORKOUT /// */
+
+.new-workout-container { 
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  padding: 1em;
+  background-color: #3A3C48;
+  border-radius: 20px;   
+}
+.new-workout-datas {
+  display: flex;
+}
+.new-workout-title {
+  margin: 0 auto;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  background-color: #1E212A;
+  color: #fff;
+  border-radius: 15px;
+}
+.new-workout-title:focus {
+  outline:  none;
+  border: none;
+  background-color: #1E212A;
+  color: #fff;
+ }
+ .new-workout-exercices {
+   background-color: red;
+ }

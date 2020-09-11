@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import AddExerciceToWorkoutForm from '../AddExerciceToWorkoutForm/index'
 import {modifyWorkout} from '../../apiCalls/index'
 
+
 // icons
 import { MdPlusOne } from "react-icons/md"
 import { BiReset} from "react-icons/bi"
@@ -11,7 +12,7 @@ import { MdDeleteForever } from "react-icons/md"
 
 import api from '../../api'
 
-function WorkoutPanel() {
+function Workout() {
 
   // get workout _id in url parameter
   let {_id} = useParams()
@@ -141,4 +142,4 @@ function WorkoutPanel() {
     )
   }
 
-  export default WorkoutPanel;
+  export default Workout;

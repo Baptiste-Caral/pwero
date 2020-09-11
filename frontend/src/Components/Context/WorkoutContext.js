@@ -1,7 +1,6 @@
 import React, { useState, useEffect, createContext } from "react"
 import { getWorkouts } from '../../apiCalls/index'
 
-
 export const WorkoutContext = createContext()
 
 export const WorkoutProvider = (props) => {

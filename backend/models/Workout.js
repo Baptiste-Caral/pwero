@@ -10,7 +10,7 @@ const workoutSchema = mongoose.Schema({
     name: {type: String},
     reps: {type: Number},
     series: {type: Number},
-    performedSeries: {type: Number}
+    performedSeries: {type: Number},
 
 },
   part: {type: String},

@@ -1,3 +1,3 @@
 # Pwero
 
-![Home](home.png)
+![Homepage Screenshot](home.png)

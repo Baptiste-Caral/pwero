@@ -3,7 +3,7 @@ import Select from './Select'
 import {ExerciceContext} from '../Context/ExerciceContext'
 import { AiFillPlusCircle } from "react-icons/ai"
 
-function AddExerciceToWorkoutForm  ({getValue}) {
+function AddExerciceToWorkoutForm  ({getFormValues}) {
 
   const exercices = useContext(ExerciceContext)
   const exercicesTitles = exercices[0].map(exerciceTitle => exerciceTitle.title)
@@ -31,8 +31,8 @@ function AddExerciceToWorkoutForm  ({getValue}) {
     event.preventDefault()
     // close select div
     setOpen(false)
-    // Put Values 
-    getValue(formValues)
+    // Put Values to parent component
+    getFormValues(formValues)
   }
   const handleOpenList = () => {
     if (open === false) {
@@ -63,7 +63,7 @@ function AddExerciceToWorkoutForm  ({getValue}) {
             )}
             </select>
           
-        <Select options={exercicesTitles} size={'large'} getValue={getValue}/>
+        <Select options={exercicesTitles} size={'large'}/>
         <button onClick={handleSubmit}>Submit</button>
           </form>
         </div>

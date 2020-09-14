@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AiFillPlusCircle } from "react-icons/ai"
 import './Select.scss';
 
-function Select({options, size, value}) {
+function Select({options, size}) {
   
   if (options === undefined) {
     options = []
@@ -22,8 +22,7 @@ function Select({options, size, value}) {
   }
   const handleChange = (e) => {
     
-    value = e.target.value
-    setSelectedValue(value)
+    setSelectedValue(e.target.value)
   }
   // create an input for each item in listValues array
   const list = options.map((option, i) => <label key={i} className='label' htmlFor={option}> {option}<input id={option} key={i} type="checkbox" value={option} name="name" onChange={handleChange} onClick={handleOpenList}/></label> )

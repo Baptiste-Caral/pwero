@@ -54,25 +54,30 @@ function Workout() {
     })
   }
   
-  const getValue = (formValues) => {
+  const addExercice = (formValues) => {
+    // formValues values from AddExerciceToWorkoutForm
 
-    //On AddExerciceToWorkoutForm form submit:
+    // ! change inside a nested component doesn't update the state, solution:
+      // Use update from immutability-helper !
+      // https://github.com/kolodny/immutability-helper
+      // équivalent to: workout.exercice.push(formValues)
+     
+    const newWorkout = update(workout, {
+      exercice: {$push: [formValues]}
+    })
+  
     //Add the new exercice in workout
-    workout.exercice.push(formValues)
-    setWorkout(workout)
+    setWorkout(newWorkout)
   
   // then persist it in database
-    modifyWorkout(workout)
-  // reload new datas from database
-    getWorkoutById(_id)
+    modifyWorkout(newWorkout)
+  
   }
 
   const incrementperformedSeries = (index, reset) => {
 
     // RAZ Button
     if (reset) {
-      // change inside a nested component doesn't update the state, solution:
-      // Use update from immutability-helper
       // https://github.com/kolodny/immutability-helper
       // equivalent to: workout.exercice[index].performedSeries = 0
       const newWorkout = update(workout, {
@@ -86,8 +91,7 @@ function Workout() {
       setWorkout(newWorkout)
       // Persist in DataBase
       modifyWorkout(newWorkout)
-
-      
+  
     // Increment PerformedSeries counter
     } else if (workout.exercice[index].performedSeries < workout.exercice[index].series) {
         // https://github.com/kolodny/immutability-helper
@@ -161,7 +165,7 @@ function Workout() {
         <div className="workout-container">
          <div className="workout-add">
           <div>
-            <AddExerciceToWorkoutForm getValue={getValue} />
+            <AddExerciceToWorkoutForm getFormValues={addExercice} />
           </div>
         </div>
           <div className="workout-name">  

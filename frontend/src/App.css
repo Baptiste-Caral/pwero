@@ -161,17 +161,14 @@ nav a {
   margin: 2em auto;
   padding: 2em 0 .7em 0;
 }
-
 .dumbbell {
   color: #F8BD33;
 }
-
 .workout-title h4 {
   margin: 0;
   color: #ebe9e9;
   text-transform: capitalize; 
 }
-
 .workout-add {
   display: flex;
   justify-content: flex-end;
@@ -392,16 +389,16 @@ nav a {
   background: #2F313E;
   border: .5px solid #F8BD33;            
 }
+
 @media screen and (min-width: 480px) {
   .wave-container {
     background-size: 100%;
     background-position: 0px -35px;
-  }
-  
+  } 
 }
+
 @media screen and (min-width: 768px) {
-  .workouts-list {
-    
+  .workouts-list { 
     display: grid;
     grid-template-columns: 5fr 5fr;
     color: #fff;
@@ -410,11 +407,14 @@ nav a {
     background-color: #2F313E;  
   }
   .wave-container {
-    
-
-    
     background-position: 0px -35%;
-    background-size: 100% 60%; 
-           
+    background-size: 100% 60%;          
+  }
+  .workout {
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+    border-radius: 30px;
+    margin: 2em auto;
+    padding: 2em 0 .7em 0;
   }
 }

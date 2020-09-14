@@ -71,7 +71,6 @@ function Workout() {
   
   // then persist it in database
     modifyWorkout(newWorkout)
-  
   }
 
   const incrementperformedSeries = (index, reset) => {
@@ -171,7 +170,7 @@ function Workout() {
           <div className="workout-name">  
           {workout.title}
           </div>
-          <div>
+          <div className="workout">
           <Div />
         </div> 
       </div> 

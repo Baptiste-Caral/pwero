@@ -2,7 +2,7 @@ import axios from 'axios'
     const token = localStorage.getItem('token')
     
 const api = axios.create({
-  baseURL: 'http://localhost:3002/api/',
+  baseURL: 'https://us-central1-pwero-9b223.cloudfunctions.net/app/api/',
   headers: {'Authorization': `Bearer ${token}`}
   
 });

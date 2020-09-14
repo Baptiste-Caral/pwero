@@ -392,3 +392,29 @@ nav a {
   background: #2F313E;
   border: .5px solid #F8BD33;            
 }
+@media screen and (min-width: 480px) {
+  .wave-container {
+    background-size: 100%;
+    background-position: 0px -35px;
+  }
+  
+}
+@media screen and (min-width: 768px) {
+  .workouts-list {
+    
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+    color: #fff;
+    margin: 0 auto;
+    padding: 0 1em 2em 1em;
+    background-color: #2F313E;  
+  }
+  .wave-container {
+    
+
+    
+    background-position: 0px -35%;
+    background-size: 100% 60%; 
+           
+  }
+}

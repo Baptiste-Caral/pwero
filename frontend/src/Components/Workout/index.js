@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import AddExerciceToWorkoutForm from '../AddExerciceToWorkoutForm/index'
 import {modifyWorkout} from '../../apiCalls/index'
+import update from 'immutability-helper'
 
 
 // icons
@@ -65,27 +66,59 @@ function Workout() {
   // reload new datas from database
     getWorkoutById(_id)
   }
-    const incrementperformedSeries = (index, reset) => {
-      if (reset) {
-        // Reset PerformedSeries counter
-       workout.exercice[index].performedSeries = 0  
-      } else if (workout.exercice[index].performedSeries < workout.exercice[index].series) {
-          // Increment PerformedSeries counter
-         workout.exercice[index].performedSeries ++
-         
-      }
-      // then persist it in database
-      modifyWorkout(workout)
-      //setWorkout(workout) WTF ça marche pas => voir PK???
-      getWorkoutById(_id)    
+
+  const incrementperformedSeries = (index, reset) => {
+
+    // RAZ Button
+    if (reset) {
+      // change inside a nested component doesn't update the state, solution:
+      // Use update from immutability-helper
+      // https://github.com/kolodny/immutability-helper
+      // equivalent to: workout.exercice[index].performedSeries = 0
+      const newWorkout = update(workout, {
+        exercice: {
+          [index]: {
+            performedSeries: {$set: 0}
+          }
+        },  
+      });
+      // setState 
+      setWorkout(newWorkout)
+      // Persist in DataBase
+      modifyWorkout(newWorkout)
+
+      
+    // Increment PerformedSeries counter
+    } else if (workout.exercice[index].performedSeries < workout.exercice[index].series) {
+        // https://github.com/kolodny/immutability-helper
+        // equivalent to:  workout.exercice[index].performedSeries ++
+        const newWorkout = update(workout, {
+          exercice: {
+            [index]: {
+              performedSeries: {$set: workout.exercice[index].performedSeries + 1 }
+            }
+          },  
+        });
+        // setState 
+        setWorkout(newWorkout)
+        // Persist in DataBase
+        modifyWorkout(newWorkout)
+    }   
   }
   const deleteExerciceToWorkout = (index) => {
 
-    workout.exercice.splice(index, 1)
-      // setWorkouts([...workouts], workout)
-      modifyWorkout(workout)
-      getWorkoutById(_id) 
+    // https://github.com/kolodny/immutability-helper 
+    // equivalent to: workout.exercice.splice(index, 1) 
+    const newWorkout = update(workout, {
+      exercice: {$splice: [[index, 1]]}  
+    })
+    // setState 
+    setWorkout(newWorkout)
+    // Persist in DataBase
+    modifyWorkout(newWorkout) 
   }
+
+
   function Div() {
 
     let checked = false
@@ -106,7 +139,6 @@ function Workout() {
             <div>
               <div className="workout-details-2" key={index}>
                 <div className="workout-details-3">
-
                   <div className="workout-series">{exerciceDetails.performedSeries}<span className="workout-series-span">/</span> </div>
                   <div className={`${checked ? "workout-series" : "workout-series-undo" }`}>{exerciceDetails.series} </div>
                   <div>&nbsp;Séries</div>
@@ -141,5 +173,4 @@ function Workout() {
       </div> 
     )
   }
-
   export default Workout;

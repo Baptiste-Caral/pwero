@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const workoutCtrl = require('../controllers/workout')
-//const auth = require('../middleware/auth')
+const auth = require('../middleware/auth')
 
 router.post('/', workoutCtrl.createWorkout)
 router.put('/:id', workoutCtrl.modifyWorkout)

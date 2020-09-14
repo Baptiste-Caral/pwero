@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const exerciceCtrl = require('../controllers/exercice')
-//const auth = require('../middleware/auth')
+const auth = require('../middleware/auth')
 
 router.post('/', exerciceCtrl.createExercice)
 router.put('/:id', exerciceCtrl.modifyExercice)

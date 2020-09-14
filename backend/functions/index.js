@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const config = require('./config')
 const exerciceRoutes = require('./routes/exercice')
-//const userRoutes = require('./routes/user')
+const userRoutes = require('./routes/user')
 const workoutRoutes = require('./routes/workout')
 
 const PORT = 3000

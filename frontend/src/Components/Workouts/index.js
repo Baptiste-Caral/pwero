@@ -12,8 +12,8 @@ function Workouts() {
 
   const [workouts] = useContext(WorkoutContext)
   
-  let workoutsList = workouts.map((workout)=> 
-    <Link key={workout._id} className="link" to={`/workout/${workout._id}`}>          
+  let workoutsList = workouts.map((workout, index)=> 
+    <Link key={workout._id} className="link" to={`/workout/${index}`}>          
       <div className="workouts-container" >
         <div className="workouts">
             <div className="verticalcenter">

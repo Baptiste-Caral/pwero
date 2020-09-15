@@ -1,21 +1,22 @@
 import React,{ useState, useContext, useEffect } from 'react'
 import {ExerciceContext} from '../Context/ExerciceContext'
 import {WorkoutContext} from '../Context/WorkoutContext'
-import api from '../../api'
-import {getWorkouts} from '../../apiCalls'
 import { useHistory } from "react-router-dom";
 import { IoIosAddCircle } from "react-icons/io"
 import { AiFillWarning } from "react-icons/ai"
-
-
+import api from '../../api'
 
 function NewWorkout () {
+  // STATE CONTEXT
   const [workouts, setWorkouts] = useContext(WorkoutContext)
   const exercices = useContext(ExerciceContext)
+
+  // LOCAL STATE
   const [open, setOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState(true)
 
   const exercicesTitles = exercices[0].map(exerciceTitle => exerciceTitle.title)
+  // useHistory: https://reactrouter.com/web/api/Hooks
   const history = useHistory()
   
   const [form, setForm] = useState({
@@ -39,23 +40,23 @@ function NewWorkout () {
   const handleChange = (event) => {
 
     const name = event.target.name
-     setForm({
-       ...form,
-       [name]: event.target.value  
-    }) 
+      setForm({
+        ...form,
+        [name]: event.target.value  
+      }) 
   }
-  const handleChangeExercice = (event) => {
-    const name = event.target.name  
-     setExerciceArray({
-      ...exerciceArray,
-      [name]: event.target.value  
-   }) 
+    const handleChangeExercice = (event) => {
+      const name = event.target.name  
+      setExerciceArray({
+        ...exerciceArray,
+        [name]: event.target.value  
+      }) 
     }
 
     const handleSubmitNewExercice = (event) => {
 
       event.preventDefault()
-      // Delete initial exercice from initial state
+      // Handle Errors
       if (exerciceArray.name === undefined ) {
         setErrorMessage("choisir un exercice")
       } else if (exerciceArray.reps === 0 ) {
@@ -64,6 +65,7 @@ function NewWorkout () {
         setErrorMessage("definir le nombre de séries")
       }else {
 
+        // Delete initial exercice from initial state
         if (form.exercice[0].reps === 0 && form.exercice[0].series === 0) {
           form.exercice.splice(0, 1)
         }
@@ -91,6 +93,7 @@ function NewWorkout () {
     } else if (form.title === "") {
       setErrorMessage("ajouter un nom")
     } else {
+
       api.post('workout', form )
         .then(function (response) {
           console.log(response)
@@ -98,8 +101,9 @@ function NewWorkout () {
         .catch(function (error) { 
           console.error(error);
         })
-      getWorkouts(setWorkouts)
-      history.push('/');
+
+        setWorkouts([...workouts,form])
+        history.push('/');
     }
   }
   
@@ -123,22 +127,13 @@ function NewWorkout () {
       setErrorMessage(false)
     }
   },[form.exercice])
-  const buildOptions = () => {
-    var arr = [];
-
-    for (let i = 1; i <= 10; i++) {
-        arr.push(<option key={i} value="{i}">{i}</option>)
-    }
-
-    return arr; 
-  }
+  
   return (
     <form className="new-workout-container" >
 
       <div className="new-workout-title-container" onChange={handleChange}>
         <input required autoComplete="off" placeholder="Entrer nom du workout" className="new-workout-title" name="title" />        
       </div>
-      
           {/* EXERCICES DATAS */}
           <div className="new-workout-datas-container">
             <div className="new-workout-exercices-container">
@@ -160,9 +155,7 @@ function NewWorkout () {
             </div>
           </div>
       {/* ADD EXERCICE FORM */}
-      
-      <div className={`${open ? 'new-workout-addform' : 'new-workout-addform-hidden'}`} onChange={handleChangeExercice}>
-          
+      <div className={`${open ? 'new-workout-addform' : 'new-workout-addform-hidden'}`} onChange={handleChangeExercice}> 
           {/* REPS */}
           <div className="new-workout-select">
           <label htmlFor="reps">Nombre de Répétitions: <span>{exerciceArray.reps}</span></label>

@@ -30,25 +30,21 @@ function App() {
           <Router>
             <div>
               <nav>
-              <Link className="logo" to="/">Pwero</Link>
-              <div>
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                  <li>
-                    <Link to="/exercices">Exercices</Link>
-                  </li>
-                </ul>
-              </div>
-                
+                <Link className="logo" to="/">Pwero</Link>
+                <div>
+                  <ul>
+                    <li>
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                      <Link to="/login">Login</Link>
+                    </li>
+                    <li>
+                      <Link to="/exercices">Exercices</Link>
+                    </li>
+                  </ul>
+                </div>   
               </nav>
-
-              {/* A <Switch> looks through its children <Route>s and
-                  renders the first one that matches the current URL. */}
               <Switch>
                 <Route exact path="/">
                   <Home />

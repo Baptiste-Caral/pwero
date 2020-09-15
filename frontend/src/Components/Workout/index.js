@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import AddExerciceToWorkoutForm from '../AddExerciceToWorkoutForm/index'
 import {modifyWorkout} from '../../apiCalls/index'
 import update from 'immutability-helper'
-
+import {WorkoutContext} from '../Context/WorkoutContext'
 
 // icons
 import { MdPlusOne } from "react-icons/md"
@@ -11,65 +11,57 @@ import { BiReset} from "react-icons/bi"
 import { VscCheck } from "react-icons/vsc"
 import { MdDeleteForever } from "react-icons/md"
 
-import api from '../../api'
 
 function Workout() {
 
+  const [workouts, setWorkouts] = useContext(WorkoutContext)
+
   // get workout _id in url parameter
   let {_id} = useParams()
-  const demo = {_id: 345,
-    title: "seance demo 2",
+  
+  const init = {_id: null,
+    title: "",
     exercice: [{
-     name: 'développé incliné',
-     reps: 10,
-     series: 4,
-     performedSeries: 0
-   },
-   {
-     name: 'pompes',
-     reps: 10,
-     series: 10,
-     performedSeries: 0
-   },
-   {
-     name: 'pompes',
-     reps: 10,
-     series: 10,
-     performedSeries: 0
+     name: '',
+     reps: '',
+     series: '',
+     performedSeries: ''
    }]}
-  const [workout, setWorkout] = useState(demo)
+  const [workout, setWorkout] = useState(init)
+  const [workoutExist, setWorkoutExist] = useState(false)
+  const [loading, setLoading] = useState(true)
+  
 
   useEffect(() => {
-    getWorkoutById(_id)
-  },[_id])
+    
+    if (workouts[_id] !== undefined ) {
+      setWorkout(workouts[_id])
+      setLoading(false)
+      setWorkoutExist(true)
+    } 
+   
+  },[workouts, _id,workoutExist])
 
-  // Get Workout Values from Api and put them in state
-  const getWorkoutById = (id) => {
-    api.get(`workout/${id}`)  
-    .then(function (response) {
-      setWorkout(response.data)  
-    })
-    .catch(function (error) { 
-      console.error(error);
-    })
-  }
-  
   const addExercice = (formValues) => {
-    // formValues values from AddExerciceToWorkoutForm
+    // formValues: values from AddExerciceToWorkoutForm
 
-    // ! change inside a nested component doesn't update the state, solution:
-      // Use update from immutability-helper !
+    // Updates inside a nested component doesn't update the state, solution:
+      // Use update from the immutability-helper library
       // https://github.com/kolodny/immutability-helper
-      // équivalent to: workout.exercice.push(formValues)
-     
+
+    // Push formvalues in exercice array inside the workout
+    // Equivalent to: workout.exercice.push(formValues)
     const newWorkout = update(workout, {
       exercice: {$push: [formValues]}
     })
+    // then update workouts array with the updated workout
+    const newWorkouts = update(workouts, {
+      [_id]: {$set: newWorkout}
+    })
+    // Set in Context
+    setWorkouts(newWorkouts)
   
-    //Add the new exercice in workout
-    setWorkout(newWorkout)
-  
-  // then persist it in database
+    // And PUT in database
     modifyWorkout(newWorkout)
   }
 
@@ -85,7 +77,8 @@ function Workout() {
             performedSeries: {$set: 0}
           }
         },  
-      });
+      })
+
       // setState 
       setWorkout(newWorkout)
       // Persist in DataBase
@@ -102,9 +95,9 @@ function Workout() {
             }
           },  
         });
-        // setState 
+        // set local State 
         setWorkout(newWorkout)
-        // Persist in DataBase
+        // PUT in DataBase
         modifyWorkout(newWorkout)
     }   
   }
@@ -115,8 +108,11 @@ function Workout() {
     const newWorkout = update(workout, {
       exercice: {$splice: [[index, 1]]}  
     })
-    // setState 
-    setWorkout(newWorkout)
+    const newWorkouts = update(workouts, {
+      [_id]: {$set: newWorkout}
+    })
+    // set Context State 
+    setWorkouts(newWorkouts)
     // Persist in DataBase
     modifyWorkout(newWorkout) 
   }
@@ -127,9 +123,12 @@ function Workout() {
     let checked = false
 
     return(
-      workout.exercice.map((exerciceDetails, index) => 
+      
+      workout.exercice.map((exerciceDetails, index) =>
+
 
           <div key={index} className="workout-details-container">
+          
           {exerciceDetails.performedSeries === exerciceDetails.series ? checked = true : checked = false }
             <div className="workout-details-1">
               <h4 className="workout-details-title">
@@ -156,9 +155,9 @@ function Workout() {
               </div>
             </div>
           </div>
-        )
-        )   
-      }
+      )
+    )   
+  }
   
     return ( 
         <div className="workout-container">
@@ -168,10 +167,11 @@ function Workout() {
           </div>
         </div>
           <div className="workout-name">  
-          {workout.title}
+          {loading && <div>Loading... </div>}
+          {workoutExist && workout.title}
           </div>
           <div className="workout">
-          <Div />
+          {workoutExist && <Div />}
         </div> 
       </div> 
     )

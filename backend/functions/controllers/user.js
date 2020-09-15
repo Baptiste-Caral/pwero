@@ -3,6 +3,31 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
 
+exports.getUser = (req, res, next) => {
+  User.find()
+  .then(user => res.status(200).json(user))
+  .catch(error => res.status(400).json({error: error})) 
+}
+exports.getOneUser = (req, res, next) => {
+  console.log(req);
+  User.findOne({ _id: req.params.id })
+    .then(user => res.status(200).json(user))
+    .catch(error => res.status(404).json({ error }));
+}
+exports.getUserWorkouts = (req, res, next) => {
+  console.log(req);
+  User.findOne({ _id: req.params.id })
+    .then(user => res.status(200).json(user.workouts))
+    .catch(error => res.status(404).json({ error }));
+}
+
+exports.modifyUserWorkout = (req, res, next) => {
+  User.updateOne({ _id: req.params.id},{ $push: { "workouts":req.body} })
+  .then(() => res.status(200).json( {message: 'UserWorkout modifié !'}))
+  .catch(error => res.status(400).json({ error }))
+  console.log(req.body)
+}
+
 exports.signup = (req, res, next) => {
   // Hash du password avant de l'envoyer en BDD
   bcrypt.hash(req.body.password, 10)
@@ -31,7 +56,7 @@ exports.login = (req, res, next) => {
       bcrypt.compare(req.body.password, user.password)
       // bcryt renvoi true ou false (on recupere ce boolean dans valid)
         .then(valid => {
-          // false pn renvoi une erreur
+          // false on renvoi une erreur
           if (!valid) {
             res.status(401).json({error: 'Mot de passe incorrect'})
           }

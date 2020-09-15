@@ -7,7 +7,7 @@ const auth = require('../middleware/auth')
 router.post('/', workoutCtrl.createWorkout)
 router.put('/:id', workoutCtrl.modifyWorkout)
 router.delete('/:id', workoutCtrl.deleteWorkout)
-router.get('/', workoutCtrl.getWorkout )
+router.get('/', auth,workoutCtrl.getWorkout )
 router.get('/:id', workoutCtrl.getOneWorkout)
 
 module.exports = router

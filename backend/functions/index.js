@@ -9,7 +9,7 @@ const exerciceRoutes = require('./routes/exercice')
 const userRoutes = require('./routes/user')
 const workoutRoutes = require('./routes/workout')
 
-const PORT = 3000
+const PORT = 3001
 // Connect to Database
 mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@cluster0.gufqd.mongodb.net/pwero?retryWrites=true&w=majority`,
   { useNewUrlParser: true,

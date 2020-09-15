@@ -1,5 +1,7 @@
 const functions = require('firebase-functions');
 
+var cors = require('cors')
+
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -8,7 +10,7 @@ const config = require('./config')
 const exerciceRoutes = require('./routes/exercice')
 const userRoutes = require('./routes/user')
 const workoutRoutes = require('./routes/workout')
-
+app.use(cors())
 const PORT = 3001
 // Connect to Database
 mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@cluster0.gufqd.mongodb.net/pwero?retryWrites=true&w=majority`,
@@ -35,10 +37,7 @@ app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
 })
 
-
-
-
-
+// module.exports = app
 exports.app = functions.https.onRequest(app)
 
 // const http = require('http')

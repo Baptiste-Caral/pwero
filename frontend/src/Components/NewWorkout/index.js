@@ -174,9 +174,6 @@ function NewWorkout () {
                   <option key={i} value={option}>{option}</option>
                 )}
               </select>
-              <div className="new-workout-addbtn-container">
-                <button className="new-workout-addbtn" onClick={handleSubmitNewExercice}>Ajouter Exercice !</button>
-              </div>
             </div>
             {/* REPS */}
             <div className="new-workout-select">
@@ -196,6 +193,9 @@ function NewWorkout () {
                   <option key={i} value={i}>{i}</option>
                 )}
               </select>
+              <div className="new-workout-addbtn-container">
+                <button className="new-workout-addbtn" onClick={handleSubmitNewExercice}>Ajouter Exercice !</button>
+              </div>
             </div>
         </div>
       </form>

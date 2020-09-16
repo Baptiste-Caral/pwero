@@ -64,7 +64,7 @@ function AddExerciceToWorkoutForm  ({getFormValues}) {
             </select>
           
         <Select options={exercicesTitles} size={'large'}/>
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleSubmit}>Ajouter</button>
           </form>
         </div>
 

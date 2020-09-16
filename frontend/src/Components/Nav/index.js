@@ -6,17 +6,20 @@ import { UserContext } from '../Context/UserContext'
 function Nav() {
 
   const [user, setUser] = useContext(UserContext)
-  
+  if(user) {
+    
+  }
       const disconnect = () => {
         localStorage.setItem("token", "")
         setUser(false)
         window.location.reload(false)
+        
       }
     
   return (
     <div>
       <nav>
-        <Link className="logo" to="/">Pwero</Link>
+        <Link className="logo" to="/">Train Smart</Link>
         <div>
           <ul>
             <li>

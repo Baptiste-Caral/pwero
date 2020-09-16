@@ -6,7 +6,7 @@ export const UserContext = createContext()
 
 export const UserProvider = (props) => {
 
-  const [user, setUser] = useState(false)
+  const [user, setUser] = useState()
   useEffect(() => {
     const token = localStorage.getItem("token")
     if (token !== '' && token !== null) {

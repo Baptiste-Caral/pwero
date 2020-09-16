@@ -13,23 +13,22 @@ export const getExercices = (setExercices) => {
         console.error(error); 
       })
 }
-export const getWorkouts = (setWorkouts) => {
-
+export function getWorkouts(setWorkouts) {
+  
   let url = "workout"
   
     if (token !== null && token !== '' ) {
       url = `auth/userworkouts/${userId}`
     } 
+    
      api.get(url)
           .then(function (response) {
             setWorkouts(response.data) 
           })
           .catch(function (error) { 
             console.error(error)
-
-            localStorage.setItem("token", '')
-            window.location.reload(false);  
           })
+       
   }
 export const deleteExercice = (exercice, setExercices) => {
     

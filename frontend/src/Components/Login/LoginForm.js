@@ -6,11 +6,12 @@ import { WorkoutContext } from '../Context/WorkoutContext'
 import { useHistory } from "react-router-dom";
 import { getWorkouts } from "../../apiCalls"
 
-function LoginForm  () {
+function LoginForm() {
 
   const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
   const [user, setUser] = useContext(UserContext)
   const [workout, setWorkout] = useContext(WorkoutContext)
+
   const initialState = {
     
     email: '',
@@ -32,7 +33,7 @@ function LoginForm  () {
     evt.preventDefault()
     
     api.post('auth/login', 
-      formValues)
+    formValues)
     .then(function (response) {
       
       const token = response.data.token
@@ -43,7 +44,8 @@ function LoginForm  () {
       setUser(true)
       history.push("/")
       // Load Workouts from Api
-      getWorkouts(setWorkout)      
+      getWorkouts(setWorkout)
+      window.location.reload()   
       
     })
     .catch(function (error) {

@@ -6,6 +6,7 @@ import { IoIosAddCircle } from "react-icons/io"
 import { AiFillWarning } from "react-icons/ai"
 import api from '../../api'
 
+
 function NewWorkout () {
   // STATE CONTEXT
   const [workouts, setWorkouts] = useContext(WorkoutContext)
@@ -16,8 +17,8 @@ function NewWorkout () {
   const [errorMessage, setErrorMessage] = useState(true)
 
   const exercicesTitles = exercices[0].map(exerciceTitle => exerciceTitle.title)
-  // useHistory: https://reactrouter.com/web/api/Hooks
-  const history = useHistory()
+  
+  const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
   
   const [form, setForm] = useState({
     title: '',
@@ -35,14 +36,22 @@ function NewWorkout () {
     series: 0,
     performedSeries: 0
   }
+  const [title, setTitle] = useState('')
   const [exerciceArray, setExerciceArray] = useState(initialExercice)
 
-  const handleChange = (event) => {
+  // const handleChange = (event) => {
 
-    const name = event.target.name
+  //   const name = event.target.name
+  //     setForm({
+  //       ...form,
+  //       [name]: event.target.value  
+  //     }) 
+  // }
+  const handleChangeTitle = (event) => {
+
       setForm({
         ...form,
-        [name]: event.target.value  
+        title: event.target.value  
       }) 
   }
     const handleChangeExercice = (event) => {
@@ -52,7 +61,7 @@ function NewWorkout () {
         [name]: event.target.value  
       }) 
     }
-
+    
     const handleSubmitNewExercice = (event) => {
 
       event.preventDefault()
@@ -71,7 +80,7 @@ function NewWorkout () {
         }
         // Push the new exercice in the workout
         form.exercice.push(exerciceArray)
-        setForm({...form, form})
+        
         // reset form values
         setExerciceArray({
         ...exerciceArray,
@@ -85,8 +94,11 @@ function NewWorkout () {
   }
   
   const handleSubmit = (event) => {
+
+    const userId = localStorage.getItem("userId")
     
     event.preventDefault()
+    console.log(form.form);
 
     if (form.exercice[0].reps === 0 && form.exercice[0].series === 0) {
       setErrorMessage("Veuillez ajouter au moins un exercice")
@@ -94,14 +106,14 @@ function NewWorkout () {
       setErrorMessage("ajouter un nom")
     } else {
 
-      api.post('workout', form )
+      api.post(`auth/userworkouts/${userId}`, form )
         .then(function (response) {
           console.log(response)
         })
         .catch(function (error) { 
           console.error(error);
         })
-
+        
         setWorkouts([...workouts,form])
         history.push('/');
     }
@@ -131,8 +143,8 @@ function NewWorkout () {
   return (
     <form className="new-workout-container" >
 
-      <div className="new-workout-title-container" onChange={handleChange}>
-        <input required autoComplete="off" placeholder="Entrer nom du workout" className="new-workout-title" name="title" />        
+      <div className="new-workout-title-container" >
+        <input required autoComplete="off" placeholder="Entrer nom du workout" className="new-workout-title" onChange={handleChangeTitle} />        
       </div>
           {/* EXERCICES DATAS */}
           <div className="new-workout-datas-container">
@@ -159,7 +171,7 @@ function NewWorkout () {
           {/* REPS */}
           <div className="new-workout-select">
           <label htmlFor="reps">Nombre de Répétitions: <span>{exerciceArray.reps}</span></label>
-            <select className="new-workout-input" onChange={handleChange} name={"reps"}  id="add-reps" defaultValue={exerciceArray.reps}>
+            <select className="new-workout-input" name={"reps"}  id="add-reps" defaultValue={exerciceArray.reps}>
               {[...Array(20)].map((x, i) => 
                 <option key={i}  value={i}>{i}</option>
               )}
@@ -178,7 +190,7 @@ function NewWorkout () {
           {/* EXERCICES */}
           <div className="new-workout-select">
           <label htmlFor="series">Exercice: {form.exercice[0].length}</label>
-            <select className="new-workout-input" name="name" onChange={handleChange} defaultValue={exerciceArray.name}>
+            <select className="new-workout-input" name="name" defaultValue={exerciceArray.name}>
               <option hidden value="">Choisir exercice</option> 
               {exercicesTitles.map((option, i) =>
                 <option key={i} value={option}>{option}</option>

@@ -1,5 +1,7 @@
 import api from '../api'
 
+const token = localStorage.getItem("token")
+const userId = localStorage.getItem("userId")
 export const getExercices = (setExercices) => {
 
   api.get('exercice')
@@ -7,19 +9,29 @@ export const getExercices = (setExercices) => {
         setExercices(response.data)
       })
       .catch(function (error) { 
-        console.error(error);
+        console.error(error); 
       })
 }
 export const getWorkouts = (setWorkouts) => {
 
-  api.get('workout')
-      .then(function (response) {
-        setWorkouts(response.data)
-      })
-      .catch(function (error) { 
-        console.error(error);
-      })
-}
+  let url = "workout"
+  
+    if (token !== null && token !== '' ) {
+      url = `auth/userworkouts/${userId}`
+    } 
+   
+     api.get(url)
+          .then(function (response) {
+            
+            setWorkouts(response.data)
+          })
+          .catch(function (error) { 
+            console.error(error)
+            localStorage.setItem("token", '')
+            
+            window.location.reload(false);  
+          })
+  }
 export const deleteExercice = (exercice, setExercices) => {
     
   api.delete(`exercice/${exercice._id}`, )
@@ -31,17 +43,15 @@ export const deleteExercice = (exercice, setExercices) => {
       console.error(error);
     })  
 }
-export const modifyWorkout = (workout) => {
-
-  // workout.exercice.push(value)
-    
-  api.put(`workout/${workout._id}`, workout  )
+export const modifyWorkout = (workout, index) => {
+  if (token !== null) {
+  api.put(`auth/userworkouts/${userId}/${index}`, workout  )
     .then(function () {
-      // reload datas from API
-      // getWorkouts(setWorkouts)
+      
     })
     .catch(function (error) {
       console.error(error);
-    })  
+    }) 
+  } 
 }
 

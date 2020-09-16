@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 // Components
@@ -13,6 +12,7 @@ import Login from './Components/Login'
 import Exercices from './Components/Exercices'
 import Workout from './Components/Workout'
 import NewWorkout from './Components/NewWorkout'
+import Nav from './Components/Nav'
 
 // Css
 import './App.css'
@@ -29,22 +29,7 @@ function App() {
       <div className="App">
           <Router>
             <div>
-              <nav>
-                <Link className="logo" to="/">Pwero</Link>
-                <div>
-                  <ul>
-                    <li>
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                      <Link to="/login">Login</Link>
-                    </li>
-                    <li>
-                      <Link to="/exercices">Exercices</Link>
-                    </li>
-                  </ul>
-                </div>   
-              </nav>
+              <Nav />
               <Switch>
                 <Route exact path="/">
                   <Home />

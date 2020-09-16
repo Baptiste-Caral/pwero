@@ -62,7 +62,7 @@ function Workout() {
     setWorkouts(newWorkouts)
   
     // And PUT in database
-    modifyWorkout(newWorkout)
+    modifyWorkout(newWorkout, _id)
   }
 
   const incrementperformedSeries = (index, reset) => {
@@ -82,7 +82,7 @@ function Workout() {
       // setState 
       setWorkout(newWorkout)
       // Persist in DataBase
-      modifyWorkout(newWorkout)
+      modifyWorkout(newWorkout, _id)
   
     // Increment PerformedSeries counter
     } else if (workout.exercice[index].performedSeries < workout.exercice[index].series) {
@@ -98,7 +98,7 @@ function Workout() {
         // set local State 
         setWorkout(newWorkout)
         // PUT in DataBase
-        modifyWorkout(newWorkout)
+        modifyWorkout(newWorkout, _id)
     }   
   }
   const deleteExerciceToWorkout = (index) => {
@@ -114,7 +114,7 @@ function Workout() {
     // set Context State 
     setWorkouts(newWorkouts)
     // Persist in DataBase
-    modifyWorkout(newWorkout) 
+    modifyWorkout(newWorkout, _id)
   }
 
 

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import api from '../../api'
+import {Link} from "react-router-dom"
 
 function LoginForm  () {
 
@@ -30,6 +31,9 @@ function LoginForm  () {
       
       const token = response.data.token
       localStorage.setItem('token', token)
+      const userId = response.data.userId
+      localStorage.setItem('userId',userId)
+      
     })
     .catch(function (error) {
       console.log(error)
@@ -39,12 +43,13 @@ function LoginForm  () {
   }
   return (
     <div className="login-form">
-      <div>Login Form</div>
+      <div>Connexion</div>
       <label htmlFor="form-new-exercice-description">email</label>
       <input placeholder='' value={formValues.email} name="email" id="form-auth-email" type="text" onChange={handleChange} />
       <label htmlFor="form-new-exercice-type">password</label>
       <input placeholder='' value={formValues.password} name="password" id="form-auth-password" type="password" onChange={handleChange} />
       <button onClick={handleSubmit} >submit</button>
+      <Link to="/signup" className="login-form-signup">Pas encore de compte: S'inscrire</Link>
     </div>
     
   ) 

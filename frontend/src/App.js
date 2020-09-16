@@ -20,38 +20,40 @@ import './App.css'
 // Contexts
 import { ExerciceProvider } from '../src/Components/Context/ExerciceContext'
 import { WorkoutProvider } from '../src/Components/Context/WorkoutContext'
+import { UserProvider } from '../src/Components/Context/UserContext'
 
 function App() {
   return (
-
-  <WorkoutProvider>
-    <ExerciceProvider>
-      <div className="App">
-          <Router>
-            <div>
-              <Nav />
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Route path="/exercices">
-                  <Exercices />
-                </Route>
-                <Route path="/workout/:_id">
-                  <Workout />
-                </Route>
-                <Route path="/new-workout/">
-                  <NewWorkout />
-                </Route>
-              </Switch>
-            </div>
-          </Router>  
-      </div>
-    </ExerciceProvider>  
-  </WorkoutProvider>
+    <UserProvider>
+      <WorkoutProvider>
+        <ExerciceProvider>
+          <div className="App">
+              <Router>
+                <div>
+                  <Nav />
+                  <Switch>
+                    <Route exact path="/">
+                      <Home />
+                    </Route>
+                    <Route path="/login">
+                      <Login />
+                    </Route>
+                    <Route path="/exercices">
+                      <Exercices />
+                    </Route>
+                    <Route path="/workout/:_id">
+                      <Workout />
+                    </Route>
+                    <Route path="/new-workout/">
+                      <NewWorkout />
+                    </Route>
+                  </Switch>
+                </div>
+              </Router>  
+          </div>
+        </ExerciceProvider>  
+      </WorkoutProvider>
+    </UserProvider>
 
   );
 }

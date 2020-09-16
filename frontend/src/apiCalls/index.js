@@ -2,6 +2,7 @@ import api from '../api'
 
 const token = localStorage.getItem("token")
 const userId = localStorage.getItem("userId")
+
 export const getExercices = (setExercices) => {
 
   api.get('exercice')
@@ -19,16 +20,14 @@ export const getWorkouts = (setWorkouts) => {
     if (token !== null && token !== '' ) {
       url = `auth/userworkouts/${userId}`
     } 
-   
      api.get(url)
           .then(function (response) {
-            
-            setWorkouts(response.data)
+            setWorkouts(response.data) 
           })
           .catch(function (error) { 
             console.error(error)
+
             localStorage.setItem("token", '')
-            
             window.location.reload(false);  
           })
   }

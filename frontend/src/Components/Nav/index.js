@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import {Link} from "react-router-dom"
+import { UserContext } from '../Context/UserContext'
+
 
 function Nav() {
 
-  const [tokenOk, setTokenOk] = useState(true)
-
-  const token = localStorage.getItem("token")
-    useEffect(() => {
-
-      if (token === null || token === '') {
-        setTokenOk(false)
+  const [user, setUser] = useContext(UserContext)
+  
+      const disconnect = () => {
+        localStorage.setItem("token", "")
+        setUser(false)
+        window.location.reload(false)
       }
-    },[token])
     
   return (
     <div>
@@ -25,15 +25,21 @@ function Nav() {
             <li>
               <Link to="/exercices">Exercices</Link>
             </li>
-            {!tokenOk &&<li>
+            {!user &&
+            <li>
               <Link to="/login">Login</Link>
             </li>}
+            {user &&
+            <li>
+              <Link onClick={disconnect} to="/login">Déconnexion</Link>
+            </li>
+            }
           </ul>
         </div>
       </nav>
         <div className="loginfo">
         
-        {!tokenOk && <Link className="link" to="/login"><div>Connectez-vous pour créer vos propres entraînements !</div></Link> }
+        {!user && <Link className="link" to="/login"><div>Connectez-vous pour créer vos propres entraînements !</div></Link> }
       </div>   
 
     </div>

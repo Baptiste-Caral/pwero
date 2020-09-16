@@ -1,9 +1,16 @@
-import React, {useState} from 'react'
+import React, { useState ,useContext } from 'react'
 import api from '../../api'
 import {Link} from "react-router-dom"
+import { UserContext } from '../Context/UserContext'
+import { WorkoutContext } from '../Context/WorkoutContext'
+import { useHistory } from "react-router-dom";
+import { getWorkouts } from "../../apiCalls"
 
 function LoginForm  () {
 
+  const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
+  const [user, setUser] = useContext(UserContext)
+  const [workout, setWorkout] = useContext(WorkoutContext)
   const initialState = {
     
     email: '',
@@ -18,7 +25,6 @@ function LoginForm  () {
       ...formValues,
       [name]: evt.target.value
     })
-    
   }
     
   const handleSubmit = (evt) => {
@@ -33,11 +39,15 @@ function LoginForm  () {
       localStorage.setItem('token', token)
       const userId = response.data.userId
       localStorage.setItem('userId',userId)
+      // user = true => user isconnected
+      setUser(true)
+      history.push("/")
+      // Load Workouts from Api
+      getWorkouts(setWorkout)      
       
     })
     .catch(function (error) {
       console.log(error)
-      
     })
     setFormValues(initialState)
   }

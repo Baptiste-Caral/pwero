@@ -383,6 +383,7 @@ nav a {
  font-size: .8em;
  align-items: center;
  color: #F8BD33;
+ cursor: pointer;
 }
 .new-workout-warning {
   display: flex;
@@ -400,11 +401,11 @@ nav a {
   padding: .5em;
   border-radius: 5px;
   background:  #F8BD33;
-  border: .5px solid #2F313E;  
+  border: .5px solid #2F313E; 
+  cursor: pointer; 
         
 }
 .new-workout-submitbtn {
-  /* width: 150px; */
   font-weight: bold;
   margin: 0 auto;
   color: #F8BD33;
@@ -412,11 +413,20 @@ nav a {
   text-align: center;
   border-radius: 5px;
   background: #2F313E;
-  border: .5px solid #F8BD33;            
+  border: .5px solid #F8BD33;
+  cursor: pointer;           
+}
+.new-workout-submitbtn:hover {
+  color: #c6a049;
+  background: #3A3C48;
+  border: .5px solid #c6a049;            
 }
 .loginfo {
   text-align: center;
   margin-bottom: 1em;
+}
+#reset {
+  display: none;
 }
 
 @media screen and (min-width: 480px) {
@@ -437,7 +447,7 @@ nav a {
   }
   .wave-container {
     background-position: 0px -35%;
-    background-size: 100% 60%;          
+    background-size: 100% 80%;          
   }
   .workout {
     display: grid;

@@ -4,6 +4,8 @@ import { WorkoutContext } from '../Context/WorkoutContext'
 import { useHistory } from "react-router-dom";
 import { IoIosAddCircle } from "react-icons/io"
 import { AiFillWarning } from "react-icons/ai"
+import { AiOutlineClose } from "react-icons/ai"
+
 import api from '../../api'
 
 function NewWorkout () {
@@ -146,7 +148,8 @@ function NewWorkout () {
         <div className="new-workout-datas-container">
           <div className="new-workout-exercices-container">
             <div className="new-workout-exercices-title">Exercices:</div>
-            <div onClick={handleAddBtn} className="new-workout-add">Ajouter&nbsp;<IoIosAddCircle size={24}/></div> 
+            {!open && <div onClick={handleAddBtn} className="new-workout-add">Ajouter&nbsp;<IoIosAddCircle size={24}/></div>}
+            {open && <div onClick={handleAddBtn} className="new-workout-add"><AiOutlineClose size={24} color={'#E2697E'}/></div>} 
           </div>
           {errorMessage &&
           <div className="new-workout-exercices-list">
@@ -199,7 +202,7 @@ function NewWorkout () {
             </div>
         </div>
       </form>
-        <button className="new-workout-submitbtn" onClick={handleSubmit}>Créer ce workout !</button>
+        {!open &&<button className="new-workout-submitbtn" onClick={handleSubmit}>Créer ce workout !</button>}
     </div>
   )
 }

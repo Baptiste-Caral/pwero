@@ -8,6 +8,9 @@ router.post('/login', userCtrl.login)
 router.get('/', userCtrl.getUser)
 router.get('/:id', userCtrl.getOneUser)
 router.get('/userworkouts/:id',auth ,userCtrl.getUserWorkouts)
-router.post('/userworkouts/:id', userCtrl.modifyUserWorkout)
+router.post('/userworkouts/:id', userCtrl.AddNewUserWorkout)
+router.get('/userworkouts/:id/:index', userCtrl.getOneUserWorkout)
+router.put('/userworkouts/:id/:index', userCtrl.modifyOneUserWorkout)
+
 
 module.exports = router

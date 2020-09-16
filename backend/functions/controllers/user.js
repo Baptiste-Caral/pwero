@@ -9,21 +9,29 @@ exports.getUser = (req, res, next) => {
   .catch(error => res.status(400).json({error: error})) 
 }
 exports.getOneUser = (req, res, next) => {
-  console.log(req);
   User.findOne({ _id: req.params.id })
     .then(user => res.status(200).json(user))
     .catch(error => res.status(404).json({ error }));
 }
-exports.getUserWorkouts = (req, res, next) => {
-  console.log(req);
+exports.getOneUserWorkout = (req, res, next) => {
+  User.findOne({ _id: req.params.id}, )
+    .then(user => res.status(200).json(user.workouts[req.params.index]))
+    .catch(error => res.status(404).json({ error }));
+}
+exports.modifyOneUserWorkout = (req, res, next) => {
+  User.updateOne({ _id: req.params.id}, { $set: {[`workouts.${req.params.index}`]: req.body}})
+    .then(user => res.status(200).json("user.workouts[req.params.index]"))
+    .catch(error => res.status(404).json({ error }));
+}
+exports.getUserWorkouts = (req, res, next) => { 
   User.findOne({ _id: req.params.id })
     .then(user => res.status(200).json(user.workouts))
     .catch(error => res.status(404).json({ error }));
 }
 
-exports.modifyUserWorkout = (req, res, next) => {
-  User.updateOne({ _id: req.params.id},{ $push: { "workouts":req.body} })
-  .then(() => res.status(200).json( {message: 'UserWorkout modifié !'}))
+exports.AddNewUserWorkout = (req, res, next) => {
+  User.updateOne({ _id: req.params.id},{ $push: {"workouts":req.body} })
+  .then(() => res.status(200).json( {message: 'Workout ajouté !'}))
   .catch(error => res.status(400).json({ error }))
   console.log(req.body)
 }

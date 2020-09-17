@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiFillPlusCircle } from "react-icons/ai"
+import { MdKeyboardArrowDown } from "react-icons/md"
 import './Select.scss';
 
 function Select({options, size}) {
@@ -9,7 +9,7 @@ function Select({options, size}) {
   }
 
   // State 
-  const [selectedValue, setSelectedValue] = useState('Ajouter un exercice')
+  const [selectedValue, setSelectedValue] = useState('Choisir un exercice')
   const [openList, setOpenList] = useState(false)
   
   
@@ -35,7 +35,7 @@ function Select({options, size}) {
             {selectedValue}
           </div>
           <div>
-            <AiFillPlusCircle size={32}/>
+            <MdKeyboardArrowDown size={21}/>
           </div> 
         </div>
         <div className="select-form-container">

@@ -125,8 +125,6 @@ function Workout() {
     return(
       
       workout.exercice !== undefined && workout.exercice !== null &&
-
-      
       workout.exercice.map((exerciceDetails, index) =>
 
           <div key={index} className="workout-details-container">

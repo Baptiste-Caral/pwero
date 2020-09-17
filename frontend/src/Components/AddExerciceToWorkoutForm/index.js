@@ -48,23 +48,22 @@ function AddExerciceToWorkoutForm  ({getFormValues}) {
       </div>
         <div className="select-form-container">
           <form 
-            className={`add-exercice-form ${open ? "add-exercice-form" : "add-exercice-form-open"}`}
-            onChange={handleChange} >
-            <label htmlFor="reps">Nombre de reps</label>
+            className={`add-exercice-form ${open ? "add-exercice-form" : "add-exercice-form-open"}`} onChange={handleChange}>
+            <Select options={exercicesTitles} size={'large'}/>
+            <label htmlFor="reps">Nombre de reps par série</label>
             <select name="reps" id="add-reps">
             {[...Array(20)].map((x, i) => 
               <option key={i} value={i+1}>{i+1}</option>
             )}
             </select>
-            <label htmlFor="series">nombre de series </label>
+            <label htmlFor="series">Nombre de séries </label>
             <select name="series" id="add-series">
             {[...Array(10)].map((x, i) => 
               <option key={i} value={i+1}>{i+1}</option>
             )}
             </select>
           
-        <Select options={exercicesTitles} size={'large'}/>
-        <button onClick={handleSubmit}>Ajouter</button>
+        <button className="form-btn" onClick={handleSubmit}>Ajouter cet exercice</button>
           </form>
         </div>
 

@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import api from '../../api'
+import { api } from '../../api'
 import {ExerciceContext} from '../Context/ExerciceContext'
 import { getExercices } from '../../apiCalls/index'
 

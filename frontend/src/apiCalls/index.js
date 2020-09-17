@@ -1,7 +1,8 @@
 import axios from 'axios'
-import api from '../api'
-const token = localStorage.getItem('token')
-    
+import { api } from '../api'
+import { config } from '../Constants'
+
+const token = localStorage.getItem('token')  
 const userId = localStorage.getItem("userId")
 
 export const getExercices = (setExercices) => {
@@ -14,13 +15,14 @@ export const getExercices = (setExercices) => {
         console.error(error); 
       })
 }
+
 export function getWorkouts(setWorkouts) {
 
   const token = localStorage.getItem("token")
-  let url = "http://localhost:3001/api/workout"
+  let url = `${config.url.API_URL}workout`
   
     if (token !== null && token !== '' ) {
-      url = `http://localhost:3001/api/auth/userworkouts/${userId}`
+      url = `${config.url.API_URL}auth/userworkouts/${userId}`
     } 
     
      axios({
@@ -31,7 +33,6 @@ export function getWorkouts(setWorkouts) {
      })
           .then(function (response) {
         
-            console.log("token", token);
             setWorkouts(response.data) 
             
           })

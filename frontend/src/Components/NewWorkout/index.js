@@ -6,7 +6,7 @@ import { IoIosAddCircle } from "react-icons/io"
 import { AiFillWarning } from "react-icons/ai"
 import { AiOutlineClose } from "react-icons/ai"
 
-import api from '../../api'
+import { api } from '../../api'
 
 function NewWorkout () {
 

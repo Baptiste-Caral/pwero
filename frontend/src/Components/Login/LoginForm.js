@@ -1,5 +1,5 @@
 import React, { useState ,useContext } from 'react'
-import api from '../../api'
+import { api } from '../../api'
 import {Link} from "react-router-dom"
 import { UserContext } from '../Context/UserContext'
 import { WorkoutContext } from '../Context/WorkoutContext'
@@ -9,6 +9,7 @@ import { getWorkouts } from "../../apiCalls"
 function LoginForm() {
   
   const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
+  // Context
   const [user, setUser] = useContext(UserContext)
   const [workouts, setWorkouts] = useContext(WorkoutContext)
   
@@ -40,6 +41,7 @@ function LoginForm() {
       localStorage.setItem('token', token)
       const userId = response.data.userId
       localStorage.setItem('userId',userId)
+
       
       getWorkouts(setWorkouts)
       setUser(true)    

@@ -5,20 +5,8 @@ export const WorkoutContext = createContext()
 
 export const WorkoutProvider = (props) => {
 
-  const object = [
-    {_id: '',
-     title: "",
-     exercice: [{
-      name: '',
-      reps: '',
-      series: '',
-      performedSeries: ''
-      }]
-    }
-  ]
   
-  const [workouts, setWorkouts] = useState(object)
-  
+  const [workouts, setWorkouts] = useState('')
   
     useEffect(() => {
       // get all workouts from Api

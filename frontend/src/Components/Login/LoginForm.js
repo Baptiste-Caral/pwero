@@ -1,4 +1,4 @@
-import React, { useState ,useContext } from 'react'
+import React, { useState ,useContext, useEffect } from 'react'
 import api from '../../api'
 import {Link} from "react-router-dom"
 import { UserContext } from '../Context/UserContext'
@@ -7,18 +7,23 @@ import { useHistory } from "react-router-dom";
 import { getWorkouts } from "../../apiCalls"
 
 function LoginForm() {
-
+  
   const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
   const [user, setUser] = useContext(UserContext)
-  const [workout, setWorkout] = useContext(WorkoutContext)
-
+  const [workouts, setWorkouts] = useContext(WorkoutContext)
+  const [connected, setConnected] = useState(false)
+  
+  
+  // useEffect(() => {
+  //   getWorkouts(setWorkouts)
+  // })
   const initialState = {
     
     email: '',
     password: ''
   }
   const [formValues, setFormValues] = useState(initialState)
-
+  
   const handleChange= (evt) => {
     const name = evt.target.name
     
@@ -27,9 +32,9 @@ function LoginForm() {
       [name]: evt.target.value
     })
   }
-    
+  
   const handleSubmit = (evt) => {
-
+    
     evt.preventDefault()
     
     api.post('auth/login', 
@@ -40,12 +45,12 @@ function LoginForm() {
       localStorage.setItem('token', token)
       const userId = response.data.userId
       localStorage.setItem('userId',userId)
-      // user = true => user isconnected
-      setUser(true)
-      history.push("/")
-      // Load Workouts from Api
-      getWorkouts(setWorkout)
-      window.location.reload()   
+      
+      getWorkouts(setWorkouts)
+      setUser(true)    
+        history.push("/")
+        window.location.reload() 
+
       
     })
     .catch(function (error) {
@@ -56,9 +61,9 @@ function LoginForm() {
   return (
     <div className="login-form">
       <div>Connexion</div>
-      <label htmlFor="form-new-exercice-description">email</label>
-      <input placeholder='' value={formValues.email} name="email" id="form-auth-email" type="text" onChange={handleChange} />
-      <label htmlFor="form-new-exercice-type">password</label>
+      <label htmlFor="email">Ton email</label>
+      <input placeholder='' value={formValues.email} name="email" id="form-auth-email" type="email" onChange={handleChange} />
+      <label htmlFor="password">Ton mot de passe</label>
       <input placeholder='' value={formValues.password} name="password" id="form-auth-password" type="password" onChange={handleChange} />
       <button onClick={handleSubmit} >submit</button>
       <Link to="/signup" className="login-form-signup">Pas encore de compte: S'inscrire</Link>

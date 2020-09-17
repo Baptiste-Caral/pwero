@@ -19,7 +19,7 @@ function Nav() {
   return (
     <div>
       <nav>
-        <Link className="logo" to="/">Train Smart</Link>
+        <Link className="logo" to="/">Pwero</Link>
         <div>
           <ul>
             <li>

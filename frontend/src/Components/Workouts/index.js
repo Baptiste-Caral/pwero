@@ -73,7 +73,7 @@ function Workouts() {
           </div>   
             <div className="workouts-add">
             <Link to='/new-workout'>
-              <IoIosAddCircle size={64} color={'#12C380'}/>
+              <IoIosAddCircle size={48} color={'#F8BD33'}/>
             </Link>
             </div> 
         </div>

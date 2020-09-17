@@ -9,6 +9,7 @@ import {
 // Components
 import Home from './Components/Home'
 import Login from './Components/Login'
+import Signup from './Components/Signup'
 import Exercices from './Components/Exercices'
 import Workout from './Components/Workout'
 import NewWorkout from './Components/NewWorkout'
@@ -29,7 +30,7 @@ function App() {
         <ExerciceProvider>
           <div className="App">
               <Router>
-                <div>
+                <div className="app-container">
                   <Nav />
                   <Switch>
                     <Route exact path="/">
@@ -37,6 +38,9 @@ function App() {
                     </Route>
                     <Route path="/login">
                       <Login />
+                    </Route>
+                    <Route path="/signup">
+                      <Signup />
                     </Route>
                     <Route path="/exercices">
                       <Exercices />

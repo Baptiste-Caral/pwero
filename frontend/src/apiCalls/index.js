@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { api } from '../api'
-import { config } from '../Constants'
+import { config } from '../api'
 
 const token = localStorage.getItem('token')  
 const userId = localStorage.getItem("userId")

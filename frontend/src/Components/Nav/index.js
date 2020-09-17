@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
 import {Link} from "react-router-dom"
 import { UserContext } from '../Context/UserContext'
-
+import { WorkoutContext } from '../Context/WorkoutContext'
+import { getWorkouts } from "../../apiCalls"
 
 function Nav() {
 
   const [user, setUser] = useContext(UserContext)
+  const [workouts, setWorkouts] = useContext(WorkoutContext)
   if(user) {
     
   }
       const disconnect = () => {
         localStorage.setItem("token", "")
         setUser(false)
-        window.location.reload(false)
-        
+        getWorkouts(setWorkouts)   
       }
     
   return (
@@ -34,7 +35,7 @@ function Nav() {
             </li>}
             {user &&
             <li>
-              <Link onClick={disconnect} to="/login">Déconnexion</Link>
+              <Link onClick={disconnect} to="/">Déconnexion</Link>
             </li>
             }
           </ul>

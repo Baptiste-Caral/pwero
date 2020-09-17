@@ -1,6 +1,7 @@
+import axios from 'axios'
 import api from '../api'
-
-const token = localStorage.getItem("token")
+const token = localStorage.getItem('token')
+    
 const userId = localStorage.getItem("userId")
 
 export const getExercices = (setExercices) => {
@@ -14,16 +15,25 @@ export const getExercices = (setExercices) => {
       })
 }
 export function getWorkouts(setWorkouts) {
-  
-  let url = "workout"
+
+  const token = localStorage.getItem("token")
+  let url = "http://localhost:3001/api/workout"
   
     if (token !== null && token !== '' ) {
-      url = `auth/userworkouts/${userId}`
+      url = `http://localhost:3001/api/auth/userworkouts/${userId}`
     } 
     
-     api.get(url)
+     axios({
+       method: 'get',
+       url: url,
+       headers: {'Authorization': `Bearer ${token}`}
+
+     })
           .then(function (response) {
+        
+            console.log("token", token);
             setWorkouts(response.data) 
+            
           })
           .catch(function (error) { 
             console.error(error)

@@ -1,12 +1,9 @@
-import React, { useState ,useContext } from 'react'
+import React, { useState } from 'react'
 import api from '../../api'
 import {Link} from "react-router-dom"
-import { useHistory } from "react-router-dom";
-import { getWorkouts } from "../../apiCalls"
 
 function LoginForm() {
-
-  const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
+  
   const [accountCreated, setAccountCreated] = useState(false)
   const [error, setError] = useState('')
  

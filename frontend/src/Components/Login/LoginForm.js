@@ -1,4 +1,4 @@
-import React, { useState ,useContext, useEffect } from 'react'
+import React, { useState ,useContext } from 'react'
 import api from '../../api'
 import {Link} from "react-router-dom"
 import { UserContext } from '../Context/UserContext'
@@ -11,12 +11,8 @@ function LoginForm() {
   const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
   const [user, setUser] = useContext(UserContext)
   const [workouts, setWorkouts] = useContext(WorkoutContext)
-  const [connected, setConnected] = useState(false)
   
   
-  // useEffect(() => {
-  //   getWorkouts(setWorkouts)
-  // })
   const initialState = {
     
     email: '',
@@ -32,7 +28,6 @@ function LoginForm() {
       [name]: evt.target.value
     })
   }
-  
   const handleSubmit = (evt) => {
     
     evt.preventDefault()
@@ -48,9 +43,8 @@ function LoginForm() {
       
       getWorkouts(setWorkouts)
       setUser(true)    
-        history.push("/")
-        window.location.reload() 
-
+      history.push("/")
+        
       
     })
     .catch(function (error) {
@@ -65,7 +59,7 @@ function LoginForm() {
       <input placeholder='' value={formValues.email} name="email" id="form-auth-email" type="email" onChange={handleChange} />
       <label htmlFor="password">Ton mot de passe</label>
       <input placeholder='' value={formValues.password} name="password" id="form-auth-password" type="password" onChange={handleChange} />
-      <button onClick={handleSubmit} >submit</button>
+      <button className="form-btn" onClick={handleSubmit} >Connexion</button>
       <Link to="/signup" className="login-form-signup">Pas encore de compte: S'inscrire</Link>
     </div>
     

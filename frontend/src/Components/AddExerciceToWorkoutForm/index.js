@@ -44,6 +44,7 @@ function AddExerciceToWorkoutForm  ({getFormValues}) {
   return (
     <div className="new-workout-form">
       <div className="add-exercice">
+        <div className="add-exercice-text">Ajouter un exercice&nbsp;</div>
         <AiFillPlusCircle color="#F8BD33" onClick={handleOpenList} size={32}/>
       </div>
         <div className="select-form-container">

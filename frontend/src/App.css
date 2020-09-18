@@ -89,8 +89,8 @@ nav a {
   color: #c6a049;
   background-color: #3A3C48;
   border: 1px solid #c6a049;
-  border-radius: 15px;
-  margin: 1em auto;
+  
+  
 }
 .login-form-signup{
   margin: 1em;
@@ -257,12 +257,17 @@ nav a {
 /* ADD Exercice to workout FORM */
 
 .add-exercice {
+  color: #fff;
   padding: .5em;
   border-radius: 10px;
   font-size: 1.2em;
   display: flex;
   justify-content: flex-end;
 
+}
+.add-exercice-text {
+  color: #fff;
+  display: none
 }
 .add-exercice-form {
   color: #fff;
@@ -492,5 +497,9 @@ nav a {
   .login-form {
     
     width: 40%;
+  }
+  .add-exercice-text {
+    color: #fff;
+    display: inline;
   }
 }

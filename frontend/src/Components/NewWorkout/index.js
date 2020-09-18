@@ -55,7 +55,7 @@ function NewWorkout () {
     const name = event.target.name  
     setExerciceArray({
       ...exerciceArray,
-      [name]: event.target.value  
+      [name]: event.target.name === "name" ?  event.target.value : parseInt(event.target.value, 10)  
     }) 
   }
     const reset = document.querySelector("#reset")

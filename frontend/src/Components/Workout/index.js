@@ -30,6 +30,8 @@ function Workout() {
    }]}
   const [workout, setWorkout] = useState(init)
   const [workoutExist, setWorkoutExist] = useState(false)
+  console.log(workouts);
+  
   
   
 
@@ -45,7 +47,7 @@ function Workout() {
   const addExercice = (formValues) => {
     // formValues: values from AddExerciceToWorkoutForm
 
-    // Updates inside a nested component doesn't update the state, solution:
+      // Updates inside a nested component doesn't update the state, solution:
       // Use update from the immutability-helper library
       // https://github.com/kolodny/immutability-helper
 
@@ -58,7 +60,6 @@ function Workout() {
     const newWorkouts = update(workouts, { 
       list: {
         [_id]: {$set: newWorkout}
-
       }
     })
     // Set in Context
@@ -122,6 +123,23 @@ function Workout() {
     modifyWorkout(newWorkout, _id)
   }
 
+  const changeTitle = (e) => {
+    const newWorkout = update(workout, {
+      title: {$set: e.target.value}
+    })
+
+    const newWorkouts = update(workouts, {
+      list: {
+        [_id]: {$set: newWorkout}
+      }
+    })
+    // Set in Context
+    setWorkouts(newWorkouts)
+    // And PUT in database
+    modifyWorkout(newWorkout, _id)
+    
+  }
+
 
   function Div() {
 
@@ -174,7 +192,8 @@ function Workout() {
         </div>
           <div className="workout-name"> 
           {workouts.loading && <Loader />}
-          {workoutExist && workout.title}
+          {workoutExist && 
+          <input autoComplete="off" className="workout-name" type="text" name="title" value={workout.title} onChange={changeTitle}/>}
           </div>
           <div className="workout">
           {workoutExist && <Div />}

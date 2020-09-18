@@ -210,8 +210,6 @@ nav a {
   margin: 0 auto;
 
 }
-
-
 .workout-name {
   display: flex;
   justify-content: center;
@@ -219,7 +217,11 @@ nav a {
   text-align: center;
   color: #F8BD33;
   font-weight: 600;
+  background-color: #282A35;
+  border: none;
+  font-size: 1.1em;
 }
+
 
 /* /// WORKOUT DETAILS /// */
 .workout-details-container {

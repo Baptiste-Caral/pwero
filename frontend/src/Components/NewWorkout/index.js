@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { IoIosAddCircle } from "react-icons/io"
 import { AiFillWarning } from "react-icons/ai"
 import { AiOutlineClose } from "react-icons/ai"
+import update from 'immutability-helper'
 
 import { api } from '../../api'
 
@@ -111,7 +112,10 @@ function NewWorkout () {
         .catch(function (error) { 
           console.error(error);
         })
-        setWorkouts([...workouts,form])
+        const newWorkouts = update(workouts, {
+          list: {$push: [form]}
+        })
+        setWorkouts(newWorkouts)
         history.push('/');
     }
   }

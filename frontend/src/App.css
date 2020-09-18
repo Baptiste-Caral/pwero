@@ -92,13 +92,20 @@ nav a {
   
   
 }
-.login-form-signup{
+.signup-link{
   margin: 1em;
   text-align: center;
   color: #F8BD33;
   text-decoration: none;
-}
 
+}
+.signup-form-text {
+  color: #fff;
+}
+.login-form-signup{
+  margin: 1em;
+  text-align: center;
+}
 
 /* /// Exercices /// */
 .exercices-container h1 {

@@ -67,7 +67,9 @@ function LoginForm() {
           <button className="form-btn" onClick={handleSubmit}>Je veux m'entraîner !</button>
         </div>
       }
-      {accountCreated &&<Link to="/login" className="login-form-signup">Clique ici pour te connecter</Link>}
+        <div className="login-form-signup">
+          {accountCreated &&<Link to="/login" className="signup-link">Clique ici pour te connecter</Link>}
+        </div>
     </div>
     
   ) 

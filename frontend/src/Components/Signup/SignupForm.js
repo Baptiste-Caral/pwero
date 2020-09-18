@@ -45,16 +45,16 @@ function LoginForm() {
     
   }
   return (
-    <div className="login-form">
-      {!accountCreated && 
-      <div>
+    <div className="">
+      {accountCreated && 
+      <div className='signup-form-text'>
         <div >Félicitations! Ton Compte a bien été Créé... </div>
         <div>Non tu ne recevras pas de mail de confirmation... </div>
-        <div>Je sais c'est un peu à la rache mais je n'ai pas encore codé cette fonctionnalité</div>
+        <div>Je sais, c'est un peu à l'arrache mais je n'ai pas encore codé cette fonctionnalité</div>
         <div>Bon allez... en attendant</div>
       </div>
       }
-      {accountCreated && 
+      {!accountCreated && 
         <div className="login-form">
           <div>Inscription</div>
           <label htmlFor="email">Ton email</label>
@@ -64,10 +64,10 @@ function LoginForm() {
           <label htmlFor="confirmPassword">Confirme ton mot de passe</label>
           <div>{error}</div>
           <input placeholder='' value={formValues.confirmPassword} name="confirmPassword" id="form-auth-confirmPassword" type="password" onChange={handleChange} />
-          <button onClick={handleSubmit}>Je veux m'entraîner !</button>
+          <button className="form-btn" onClick={handleSubmit}>Je veux m'entraîner !</button>
         </div>
       }
-      {!accountCreated &&<Link to="/login" className="login-form-signup">Clique ici pour te connecter</Link>}
+      {accountCreated &&<Link to="/login" className="login-form-signup">Clique ici pour te connecter</Link>}
     </div>
     
   ) 

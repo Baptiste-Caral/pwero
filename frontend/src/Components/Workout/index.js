@@ -130,7 +130,7 @@ function Workout() {
           <div key={index} className="workout-details-container">
           
           {exerciceDetails.performedSeries === exerciceDetails.series ? checked = true : checked = false}
-          {console.log(exerciceDetails.performedSeries,exerciceDetails.series, exerciceDetails.name, index )}
+          
             <div className="workout-details-1">
               <h4 className="workout-details-title">
                 {exerciceDetails.name} 

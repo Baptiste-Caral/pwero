@@ -494,8 +494,8 @@ nav a {
     margin: 2em auto;
     padding: 2em 0 .7em 0;
   }
-  .login-form {
-    
+  .signup-form-text {
+    margin: 0 auto;
     width: 40%;
   }
   .add-exercice-text {

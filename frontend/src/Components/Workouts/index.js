@@ -62,7 +62,7 @@ function Workouts() {
       <div>
         <div className="workouts-container">
           <div className="workouts-header">
-            <div className="workouts-title">Mes Workouts</div> 
+            <div className="workouts-title">Mes Entraîenements</div> 
           </div>
           <div className="wave-container">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

@@ -43,7 +43,7 @@ function Nav() {
       </nav>
         <div className="loginfo">
         
-        {!user && <Link className="link" to="/login"><div>Connectez-vous pour créer vos propres entraînements !</div></Link> }
+        {!user && <Link className="link" to="/login"><div>Connecte-toi pour créer tes propres entraînements !</div></Link> }
       </div>   
 
     </div>

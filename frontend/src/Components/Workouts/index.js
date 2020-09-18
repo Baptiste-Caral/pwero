@@ -1,8 +1,9 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {WorkoutContext} from '../Context/WorkoutContext'
 import {UserContext} from '../Context/UserContext'
 import {Link} from 'react-router-dom'
 import jwt from 'jsonwebtoken'
+import Loader from '../Loader'
 
 // icons
 import { BiDumbbell } from "react-icons/bi"
@@ -14,6 +15,7 @@ function Workouts() {
 
   const [workouts] = useContext(WorkoutContext)
   const [user, setUser] = useContext(UserContext)
+  
 
   const token = localStorage.getItem("token")
 
@@ -28,7 +30,7 @@ function Workouts() {
   
   useEffect(() => {
     if(tokenIsExpired(token)) {
-      localStorage.setItem("token", "")
+      localStorage.removeItem("token")
       setUser(false)
       window.location.reload(false)
     } 
@@ -36,7 +38,7 @@ function Workouts() {
    
   let workoutsList =
   
-  workouts && workouts.map((workout, index)=> 
+  workouts.list && workouts.list.map((workout, index)=> 
     <Link key={index} className="link" to={`/workout/${index}`}>          
       <div className="workouts-container" >
         <div className="workouts">
@@ -68,8 +70,10 @@ function Workouts() {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
               <path fill="#2F313E" d="M0,224L48,197.3C96,171,192,117,288,96C384,75,480,85,576,117.3C672,149,768,203,864,197.3C960,192,1056,128,1152,112C1248,96,1344,128,1392,144L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>    
             </svg>
-            <div className="workouts-list">{workoutsList}</div>
-            {!workouts && <div className="workouts-container">Pas encore de workouts</div>}
+            <div className="workouts-list">{workoutsList}{workouts.loading && <Loader />}</div>
+        
+            {!workouts && 
+              <div className="workouts-container">Pas encore de workouts</div>}
           </div>   
             <div className="workouts-add">
             <Link to='/new-workout'>

@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import {ExerciceContext} from '../Context/ExerciceContext'
 import NewExercice from '../NewExercice'
-import {deleteExercice} from '../../apiCalls/index'
+import {deleteExercice} from '../../apiCalls'
 
 //icons
 import { MdDeleteForever } from "react-icons/md"

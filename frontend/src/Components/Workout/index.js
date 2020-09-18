@@ -4,6 +4,7 @@ import AddExerciceToWorkoutForm from '../AddExerciceToWorkoutForm/index'
 import {modifyWorkout} from '../../apiCalls/index'
 import update from 'immutability-helper'
 import {WorkoutContext} from '../Context/WorkoutContext'
+import Loader from '../Loader'
 
 // icons
 import { MdPlusOne } from "react-icons/md"
@@ -29,18 +30,17 @@ function Workout() {
    }]}
   const [workout, setWorkout] = useState(init)
   const [workoutExist, setWorkoutExist] = useState(false)
-  const [loading, setLoading] = useState(true)
+  
   
 
   useEffect(() => {
     
-    if (workouts[_id] !== undefined ) {
-      setWorkout(workouts[_id])
-      setLoading(false)
+    if (workouts.list[_id] !== undefined ) {
+      setWorkout(workouts.list[_id])
       setWorkoutExist(true)
     } 
    
-  },[workouts, _id,workoutExist])
+  },[workouts.list, _id, workoutExist])
 
   const addExercice = (formValues) => {
     // formValues: values from AddExerciceToWorkoutForm
@@ -55,8 +55,11 @@ function Workout() {
       exercice: {$push: [formValues]}
     })
     // then update workouts array with the updated workout
-    const newWorkouts = update(workouts, {
-      [_id]: {$set: newWorkout}
+    const newWorkouts = update(workouts, { 
+      list: {
+        [_id]: {$set: newWorkout}
+
+      }
     })
     // Set in Context
     setWorkouts(newWorkouts)
@@ -109,7 +112,9 @@ function Workout() {
       exercice: {$splice: [[index, 1]]}  
     })
     const newWorkouts = update(workouts, {
-      [_id]: {$set: newWorkout}
+      list: {
+        [_id]: {$set: newWorkout}
+      }
     })
     // set Context State 
     setWorkouts(newWorkouts)
@@ -167,8 +172,8 @@ function Workout() {
             <AddExerciceToWorkoutForm getFormValues={addExercice} />
           </div>
         </div>
-          <div className="workout-name">  
-          {loading && <div>Loading... </div>}
+          <div className="workout-name"> 
+          {workouts.loading && <Loader />}
           {workoutExist && workout.title}
           </div>
           <div className="workout">

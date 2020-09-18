@@ -6,7 +6,11 @@ export const WorkoutContext = createContext()
 export const WorkoutProvider = (props) => {
 
   
-  const [workouts, setWorkouts] = useState('')
+  const [workouts, setWorkouts] = useState({
+    list: '',
+    loading: true
+  })
+  
   
     useEffect(() => {
       // get all workouts from Api

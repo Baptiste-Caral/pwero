@@ -32,9 +32,12 @@ export function getWorkouts(setWorkouts) {
 
      })
           .then(function (response) {
-        
-            setWorkouts(response.data) 
-            
+        console.log(response.data);
+            setWorkouts({
+              list: response.data,
+              loading: false
+            })
+              
           })
           .catch(function (error) { 
             console.error(error)

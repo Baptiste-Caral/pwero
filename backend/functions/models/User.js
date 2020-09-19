@@ -16,6 +16,13 @@ const userSchema = mongoose.Schema({
       series: {type: Number},
       performedSeries: {type: Number},
     }
+  },
+  customExercices: {
+    type: [],
+    default: undefined,
+    name: {type: String, required: true},
+    title: {type: String, required: true},
+    link: {type:String}
   }
 })
 // Pour que l'user ne puisse pas créer la meme adresse mail

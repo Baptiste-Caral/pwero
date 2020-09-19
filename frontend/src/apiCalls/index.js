@@ -16,6 +16,7 @@ export const getExercices = (setExercices) => {
       })
 }
 
+
 export function getWorkouts(setWorkouts) {
 
   const token = localStorage.getItem("token")
@@ -29,15 +30,12 @@ export function getWorkouts(setWorkouts) {
        method: 'get',
        url: url,
        headers: {'Authorization': `Bearer ${token}`}
-
      })
-          .then(function (response) {
-        console.log(response.data);
+          .then(function (response) {   
             setWorkouts({
               list: response.data,
               loading: false
-            })
-              
+            })      
           })
           .catch(function (error) { 
             console.error(error)

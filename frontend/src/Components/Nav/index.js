@@ -20,7 +20,9 @@ function Nav() {
   return (
     <div>
       <nav>
-        <Link className="logo" to="/">Pwero</Link>
+        <Link className="logo" to="/">
+          Trainer
+        </Link>
         <div>
           <ul>
             <li>
@@ -42,7 +44,6 @@ function Nav() {
         </div>
       </nav>
         <div className="loginfo">
-        
         {!user && <Link className="link" to="/login"><div>Connecte-toi pour créer tes propres entraînements !</div></Link> }
       </div>   
 

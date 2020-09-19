@@ -19,8 +19,9 @@ function NewWorkout () {
   // LOCAL STATE
   const [open, setOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState(true)
-
-  const exercicesTitles = exercices[0].map(exerciceTitle => exerciceTitle.title)
+  
+  const exercicesList = exercices[0].map(exercice => exercice)
+  console.log("addexooos:" , exercicesList);
   
   const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
   
@@ -28,22 +29,30 @@ function NewWorkout () {
     title: '',
     exercice: [
       {
-      name: exercicesTitles[0],
+      name: "",
       reps: 0,
       series: 0,
       performedSeries: 0
       }
     ]
   })
-  const initialExercice = {
-    name: exercicesTitles[0],
-    reps: 0,
-    series: 0,
-    performedSeries: 0
-  }
+ 
   
-  const [exerciceArray, setExerciceArray] = useState(initialExercice)
+const [customExercices, setCustomExercices] = useState([])
+const [exerciceArray, setExerciceArray] = useState([])
 
+const userId = localStorage.getItem('userId')
+
+ useEffect(() => {
+
+   api.get(`/auth/custom/${userId}`)
+       .then(function (response) {
+         setCustomExercices(response.data)
+       })
+       .catch(function (error) { 
+         console.error(error); 
+       })
+ },[userId])
   
   const handleChangeTitle = (event) => {
     setForm({
@@ -83,7 +92,7 @@ function NewWorkout () {
         reset.click()
         setExerciceArray({
         ...exerciceArray,
-        name: exercicesTitles[0],
+        name: "",
         reps: 0,
         series: 0,
       })
@@ -140,6 +149,7 @@ function NewWorkout () {
     }
   },[form.exercice])
   
+  
   return (
     <div className="new-workout-container" >
       {/* TITLE INPUT */}
@@ -177,11 +187,22 @@ function NewWorkout () {
               <label htmlFor="series">Exercice: {form.exercice[0].length}</label>
               <select className="new-workout-input" name="name" defaultValue={exerciceArray.name}>
                 <option hidden value="">Choisir exercice</option> 
-                {exercicesTitles.map((option, i) =>
-                  <option key={i} value={option}>{option}</option>
+                <optgroup label="Exercices Perso">
+                {customExercices &&
+                customExercices.map((exo) => 
+                  <option key={exo.title}>{exo.title}</option>
+                )}
+                </optgroup>
+                {exercicesList.map((option, i) =>
+                  <optgroup key={i} label={option.name}>
+                  {option.exercices.map((exercice) => 
+                    <option key={exercice.title}>{exercice.title}</option>
+                  )}
+                  </optgroup>
                 )}
               </select>
             </div>
+            
             {/* REPS */}
             <div className="new-workout-select">
             <label htmlFor="reps">Nombre de Répétitions par série: <span>{exerciceArray.reps}</span></label>

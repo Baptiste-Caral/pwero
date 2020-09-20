@@ -3,7 +3,7 @@ import { api } from '../../api'
 import {Link} from "react-router-dom"
 import { UserContext } from '../Context/UserContext'
 import { WorkoutContext } from '../Context/WorkoutContext'
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom"
 import { getWorkouts } from "../../apiCalls"
 
 function LoginForm() {

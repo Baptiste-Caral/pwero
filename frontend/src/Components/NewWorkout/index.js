@@ -10,8 +10,6 @@ import update from 'immutability-helper'
 import { api } from '../../api'
 
 function NewWorkout () {
-
-  
   // STATE CONTEXT
   const [workouts, setWorkouts] = useContext(WorkoutContext)
   const exercices = useContext(ExerciceContext)
@@ -21,7 +19,8 @@ function NewWorkout () {
   const [errorMessage, setErrorMessage] = useState(true)
   
   const exercicesList = exercices[0].map(exercice => exercice)
-  console.log("addexooos:" , exercicesList);
+
+  
   
   const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
   
@@ -121,13 +120,17 @@ const userId = localStorage.getItem('userId')
         .catch(function (error) { 
           console.error(error);
         })
-        const newWorkouts = update(workouts, {
-          list: {$push: [form]}
-        })
-        setWorkouts(newWorkouts)
+        
+          const newWorkouts = update(workouts, {
+            list: {$push: [form]}
+          })
+          setWorkouts(newWorkouts)
+
+        
         history.push('/');
+      }
     }
-  }
+   
   
   const handleAddBtn = () => {
     if (open === false) {

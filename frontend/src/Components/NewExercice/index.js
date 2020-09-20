@@ -3,6 +3,7 @@ import { api } from '../../api'
 import {ExerciceContext} from '../Context/ExerciceContext'
 import { getExercices } from '../../apiCalls/index'
 
+
 function NewExercice({closeForm, data}) {
 
   const initialState = {
@@ -35,7 +36,9 @@ function NewExercice({closeForm, data}) {
       config
       )
     .then(function (response) {
+
       
+     
       // reload datas from API
       getExercices(setExercices)
     
@@ -45,7 +48,7 @@ function NewExercice({closeForm, data}) {
     });
     setFormValues(initialState)
 
-    closeForm(formValues.title)
+    closeForm(formValues)
   }
     return (
    

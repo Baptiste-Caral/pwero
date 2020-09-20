@@ -3,6 +3,7 @@ import {ExerciceContext} from '../Context/ExerciceContext'
 import NewExercice from '../NewExercice'
 import {deleteExercice} from '../../apiCalls'
 import { api } from "../../api"
+import update from 'immutability-helper'
 
 //icons
 import { MdDeleteForever } from "react-icons/md"
@@ -36,8 +37,13 @@ function Exercices() {
     setClickedButton({button: false})
   }
 
-  const closeForm = (NewExerciceTitle) => {
-    setClickedButton({button: false, title: NewExerciceTitle})
+  const closeForm = (formValues) => {
+    setClickedButton({button: false})
+
+    const newCustomExercices = update(customExercices, 
+      {$push: [formValues]}
+    )
+    setCustomExercices(newCustomExercices)
   }
 
 
@@ -54,7 +60,7 @@ function Exercices() {
   </div> 
   )
   const customExercicesList = customExercices.map((list) =>
-  <div className="exercices-list-title" key={list._id}>
+  <div key={list.title} className="exercices-list-title" >
     <div className="exercices-list-custom">
       <div >{list.title}</div>
       <MdDeleteForever color={'#E2697E'} size={24} onClick={() => deleteExercice(list, setExercices)}/>

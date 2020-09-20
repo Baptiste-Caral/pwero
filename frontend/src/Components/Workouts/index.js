@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {WorkoutContext} from '../Context/WorkoutContext'
 import {UserContext} from '../Context/UserContext'
 import {Link} from 'react-router-dom'
@@ -35,7 +35,7 @@ function Workouts() {
       window.location.reload(false)
     } 
   })
-   
+  
   let workoutsList =
   
   workouts.list && workouts.list.map((workout, index)=> 
@@ -58,8 +58,6 @@ function Workouts() {
     </Link>
   )
   
-  // let limb = exercices.map((item, i ) => <p key={i}>{item.limb}</p>)
-  
     return (
       <div>
         <div className="workouts-container">
@@ -72,7 +70,7 @@ function Workouts() {
             </svg>
             <div className="workouts-list">{workoutsList}{workouts.loading && <Loader />}</div>
         
-            {!workouts && 
+            {workouts.list.length === 0 && 
               <div className="workouts-container">Pas encore de workouts</div>}
           </div>   
             <div className="workouts-add">

@@ -5,6 +5,9 @@ import {modifyWorkout} from '../../apiCalls/index'
 import update from 'immutability-helper'
 import {WorkoutContext} from '../Context/WorkoutContext'
 import Loader from '../Loader'
+import { api } from '../../api'
+import { useHistory } from "react-router-dom"
+
 
 // icons
 import { MdPlusOne } from "react-icons/md"
@@ -14,7 +17,8 @@ import { MdDeleteForever } from "react-icons/md"
 
 
 function Workout() {
-
+  
+  const history = useHistory() // useHistory: https://reactrouter.com/web/api/Hooks
   const [workouts, setWorkouts] = useContext(WorkoutContext)
 
   // get workout _id in url parameter
@@ -30,11 +34,7 @@ function Workout() {
    }]}
   const [workout, setWorkout] = useState(init)
   const [workoutExist, setWorkoutExist] = useState(false)
-  console.log(workouts);
   
-  
-  
-
   useEffect(() => {
     
     if (workouts.list[_id] !== undefined ) {
@@ -139,6 +139,32 @@ function Workout() {
     modifyWorkout(newWorkout, _id)
     
   }
+  const userId =localStorage.getItem("userId")
+
+  const deleteWorkout = () => {
+    
+     
+    if(window.confirm('Supprimer cet entraînement ?')) {
+
+      const newWorkouts = update(workouts, {
+        list: {$splice: [[_id, 1]]}  
+      })
+     setWorkouts(newWorkouts)
+      api.delete(`auth/userworkouts/${userId}/${workout.title}`)
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) { 
+        console.error(error); 
+      })
+      history.push("/")
+    
+    }
+   
+
+    
+    
+  }
 
 
   function Div() {
@@ -185,6 +211,9 @@ function Workout() {
   
     return ( 
         <div className="workout-container">
+        <div className="workout-delete">
+          <MdDeleteForever color={'#E2697E'} size={27} onClick={deleteWorkout}/>
+        </div>
          <div className="workout-add">
           <div>
             <AddExerciceToWorkoutForm getFormValues={addExercice} />

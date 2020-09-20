@@ -47,6 +47,12 @@ exports.getCustomExercices = (req, res, next) => {
     .catch(error => res.status(404).json({ error }));
 }
 
+exports.deleteWorkout = (req, res, next) => {
+  User.updateOne({ _id: req.params.id}, { $pull: { workouts: {title: req.params.title}}})
+    .then(user => res.status(200).json(user.workouts))
+    .catch(error => res.status(404).json({ error }));
+}
+
 exports.signup = (req, res, next) => {
   // Hash du password avant de l'envoyer en BDD
   bcrypt.hash(req.body.password, 10)
@@ -54,7 +60,9 @@ exports.signup = (req, res, next) => {
       // Injection de l'email + password hashé dans le model User
       const user = new User({
         email: req.body.email,
-        password: hash
+        password: hash,
+        workouts: [],
+        customExercices: []
       })
       
       // Envoi vers la BDD 

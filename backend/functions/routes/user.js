@@ -13,6 +13,7 @@ router.get('/userworkouts/:id/:index', auth, userCtrl.getOneUserWorkout)
 router.put('/userworkouts/:id/:index', auth, userCtrl.modifyOneUserWorkout)
 router.post('/addexercice/:id', auth, userCtrl.AddCustomExercice)
 router.get('/custom/:id', auth, userCtrl.getCustomExercices)
+router.delete('/userworkouts/:id/:title', auth, userCtrl.deleteWorkout)
 
 
 

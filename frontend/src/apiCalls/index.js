@@ -31,7 +31,8 @@ export function getWorkouts(setWorkouts) {
        url: url,
        headers: {'Authorization': `Bearer ${token}`}
      })
-          .then(function (response) {   
+          .then(function (response) { 
+            
             setWorkouts({
               list: response.data,
               loading: false

@@ -62,7 +62,7 @@ function Workouts() {
       <div>
         <div className="workouts-container">
           <div className="workouts-header">
-            <div className="workouts-title">Mes Entraîenements</div> 
+            <div className="workouts-title">Mes Entraînements</div> 
           </div>
           <div className="wave-container">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -70,7 +70,7 @@ function Workouts() {
             </svg>
             <div className="workouts-list">{workoutsList}{workouts.loading && <Loader />}</div>
         
-            {workouts.list.length === 0 && 
+            {!workouts.loading && workouts.list.length === 0 && 
               <div className="workouts-container">Pas encore de workouts</div>}
           </div>   
             <div className="workouts-add">

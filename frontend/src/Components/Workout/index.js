@@ -182,22 +182,27 @@ function Workout() {
           
             <div className="workout-details-1">
               <h4 className="workout-details-title">
-                {exerciceDetails.name} 
-                {checked && <VscCheck />}
+                {exerciceDetails.name}
               </h4>
               <div><MdDeleteForever color={'#E2697E'} size={27} onClick={() => deleteExerciceToWorkout(index)} /></div>  
             </div>
             <div>{exerciceDetails.reps} Reps</div>
             <div>
               <div className="workout-details-2" key={index}>
+                 {!checked && 
                 <div className="workout-details-3">
-                  <div className="workout-series">{exerciceDetails.performedSeries}<span className="workout-series-span">/</span> </div>
+                 <div className="workout-series">{exerciceDetails.performedSeries}<span className="workout-series-span">/</span> </div>
                   <div className={`${checked ? "workout-series" : "workout-series-undo" }`}>{exerciceDetails.series} </div>
                   <div>&nbsp;Séries</div>
                 </div>
+                  }
+                  {checked && 
+                    <div className="workout-details-3">
+                    <div className="workout-series">Terminé !&nbsp;</div>
+                      <VscCheck size={27} />
+                    </div>}
                 <div className="workout-details-increment">
                   <div>
-                    {checked && <VscCheck size={27} />}
                     {!checked && <MdPlusOne size={27} color={'#F8BD33'}  onClick={() => incrementperformedSeries(index)}/>}
                   </div>
                   <div onClick={(reset) => incrementperformedSeries(index, reset)}><BiReset color={'#12C380'} size={27} /></div>

@@ -158,12 +158,7 @@ function Workout() {
         console.error(error); 
       })
       history.push("/")
-    
-    }
-   
-
-    
-    
+    } 
   }
 
 
@@ -176,10 +171,8 @@ function Workout() {
       workout.exercice !== undefined && workout.exercice !== null &&
       workout.exercice.map((exerciceDetails, index) =>
 
-          <div key={index} className="workout-details-container">
-          
+          <div key={index} className="workout-details-container"> 
           {exerciceDetails.performedSeries === exerciceDetails.series ? checked = true : checked = false}
-          
             <div className="workout-details-1">
               <h4 className="workout-details-title">
                 {exerciceDetails.name}
